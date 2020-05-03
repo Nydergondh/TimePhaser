@@ -6,6 +6,7 @@ public class HumanoidAnimations : MonoBehaviour
 {
     protected Animator objAnim;
 
+
     private void Awake() {
         objAnim = GetComponent<Animator>();
     }
@@ -34,5 +35,10 @@ public class HumanoidAnimations : MonoBehaviour
         }
 
     }
-    
+    /*
+    public void SetTime() {
+        objAnim.speed = timeMod;
+
+    }
+    */
 }
