@@ -69,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
             deltaX = Input.GetAxis("Horizontal");
         }
 
-
         //Jump if on Ground
         if (Input.GetButtonDown("Jump")) {
             deltaX = Input.GetAxis("Horizontal") * runSpeed;
@@ -100,10 +99,10 @@ public class PlayerMovement : MonoBehaviour
     private void ChangeDirection(float delta) {
 
         if (delta < 0 || (transform.localScale.x < 0 && delta == 0)) {
-            transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         }
         else {
-            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
 
     }
