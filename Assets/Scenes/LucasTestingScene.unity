@@ -381,16 +381,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 5
   jumpSpeed: 10
+  airSpeed: 5
   deltaX: 0
+  minimumDeltaY: 0.01
   deltaY: 0
-  deltaYMinimum: 0
   isTouchingGround: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!95 &502547920
 Animator:
   serializedVersion: 3
@@ -744,7 +739,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31a0192749349244bb5cad3fbd6836fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

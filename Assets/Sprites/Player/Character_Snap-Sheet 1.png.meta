@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: 95df6e21cc13c37428171fb9059a1321
+guid: 53b4f2047bbaf8748b8da6f205a8113b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6341884459239670280
-    second: Character_Snap-Sheet_0
+      213: -5723097350053834407
+    second: Character_Snap-Sheet 1_0
   - first:
-      213: 2999023306403067369
-    second: Character_Snap-Sheet_1
+      213: -8196450127229364324
+    second: Character_Snap-Sheet 1_1
   - first:
-      213: 1479738703238478969
-    second: Character_Snap-Sheet_2
+      213: -6232753396669094574
+    second: Character_Snap-Sheet 1_2
   - first:
-      213: 770022123779891198
-    second: Character_Snap-Sheet_3
+      213: 4445244958911023263
+    second: Character_Snap-Sheet 1_3
   - first:
-      213: 2969793143275914578
-    second: Character_Snap-Sheet_4
+      213: -7541910249883886992
+    second: Character_Snap-Sheet 1_4
   - first:
-      213: 8188496584544896964
-    second: Character_Snap-Sheet_5
+      213: 4561252938648318670
+    second: Character_Snap-Sheet 1_5
   - first:
-      213: -3824135406827337247
-    second: Character_Snap-Sheet_6
+      213: 6170357669025950226
+    second: Character_Snap-Sheet 1_6
   - first:
-      213: 5863356931899451998
-    second: Character_Snap-Sheet_7
+      213: 2132557942054546669
+    second: Character_Snap-Sheet 1_7
   - first:
-      213: 1233862933470882659
-    second: Character_Snap-Sheet_8
+      213: -7310226795503876452
+    second: Character_Snap-Sheet 1_8
   - first:
-      213: -357604533517004254
-    second: Character_Snap-Sheet_9
+      213: 400252030521750956
+    second: Character_Snap-Sheet 1_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character_Snap-Sheet_0
+      name: Character_Snap-Sheet 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fdf2706fa91df7a0800000000000000
-      internalID: -6341884459239670280
+      spriteID: 951df0b48497390b0800000000000000
+      internalID: -5723097350053834407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Snap-Sheet_1
+      name: Character_Snap-Sheet 1_1
       rect:
         serializedVersion: 2
         x: 64
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e5b543cecbae9920800000000000000
-      internalID: 2999023306403067369
+      spriteID: c97d943390c504e80800000000000000
+      internalID: -8196450127229364324
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Snap-Sheet_2
+      name: Character_Snap-Sheet 1_2
       rect:
         serializedVersion: 2
         x: 128
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97c3de6b286198410800000000000000
-      internalID: 1479738703238478969
+      spriteID: 255edeaeecfc089a0800000000000000
+      internalID: -6232753396669094574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Snap-Sheet_3
+      name: Character_Snap-Sheet 1_3
       rect:
         serializedVersion: 2
         x: 192
@@ -194,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eff9715ba0bafaa00800000000000000
-      internalID: 770022123779891198
+      spriteID: f98cc7bfcbea0bd30800000000000000
+      internalID: 4445244958911023263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Snap-Sheet_4
+      name: Character_Snap-Sheet 1_4
       rect:
         serializedVersion: 2
         x: 0
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2550a511123d63920800000000000000
-      internalID: 2969793143275914578
+      spriteID: 07a1bc32690c55790800000000000000
+      internalID: -7541910249883886992
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Snap-Sheet_5
+      name: Character_Snap-Sheet 1_5
       rect:
         serializedVersion: 2
         x: 64
@@ -236,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c74c46524263a170800000000000000
-      internalID: 8188496584544896964
+      spriteID: ec2f6d29163dc4f30800000000000000
+      internalID: 4561252938648318670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Snap-Sheet_6
+      name: Character_Snap-Sheet 1_6
       rect:
         serializedVersion: 2
         x: 128
@@ -257,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e9001fcb11fdeac0800000000000000
-      internalID: -3824135406827337247
+      spriteID: 21a2667ab9381a550800000000000000
+      internalID: 6170357669025950226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Snap-Sheet_7
+      name: Character_Snap-Sheet 1_7
       rect:
         serializedVersion: 2
         x: 192
@@ -278,14 +278,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5ae03d6014de5150800000000000000
-      internalID: 5863356931899451998
+      spriteID: dec6917462e589d10800000000000000
+      internalID: 2132557942054546669
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Snap-Sheet_8
+      name: Character_Snap-Sheet 1_8
       rect:
         serializedVersion: 2
         x: 0
@@ -299,14 +299,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36bad0bfccf8f1110800000000000000
-      internalID: 1233862933470882659
+      spriteID: c960372f57bdc8a90800000000000000
+      internalID: -7310226795503876452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Snap-Sheet_9
+      name: Character_Snap-Sheet 1_9
       rect:
         serializedVersion: 2
         x: 64
@@ -320,8 +320,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22256a94298890bf0800000000000000
-      internalID: -357604533517004254
+      spriteID: ca5b0e3e91bfd8500800000000000000
+      internalID: 400252030521750956
       vertices: []
       indices: 
       edges: []
@@ -336,7 +336,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures:
-    - texture: {fileID: 2800000, guid: cf6997ae28f35664a95bdc97504854c1, type: 3}
+    - texture: {fileID: 2800000, guid: fedb0fc6cfcf5c64cb66eaae42392311, type: 3}
       name: _Emission
   spritePackingTag: 
   pSDRemoveMatte: 0
