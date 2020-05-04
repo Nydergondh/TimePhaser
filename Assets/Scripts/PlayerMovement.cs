@@ -9,16 +9,18 @@ public class PlayerMovement : MonoBehaviour
 
     public float runSpeed = 3.5f;
     public float jumpSpeed = 5f;
+    public float airSpeed = 5f;
+    private bool jumping;
 
     public float deltaX;
-    public float deltaY;
-    public float deltaYMinimum;
-    private float jumpingVelocity; // will be used in the future to keep moementum of the jump
+
+    public float minimumDeltaY = 0.01f;
+    public float deltaY;  
 
     public bool isTouchingGround;
 
-    public LayerMask groundLayer;
-    public LayerMask enemyLayer;
+    //public LayerMask groundLayer;
+    //public LayerMask enemyLayer;
 
     private SpriteRenderer playerRenderer;
     public new Rigidbody2D rigidbody { get; set; }
@@ -61,27 +63,44 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement() {
         Vector2 vel;
-        //if can move (there are condissions so that you can move)
-        if (Input.GetButton("Horizontal")) {
+        //on ground
+        if (Input.GetButton("Horizontal") && deltaY == 0) {
             deltaX = Input.GetAxis("Horizontal") * runSpeed;
         }
+        //on air
+        else if(Input.GetButton("Horizontal") && deltaY != 0) {
+            deltaX = Input.GetAxis("Horizontal") * airSpeed;
+        }
+        //totaly still (used getaxis so that it conservs a little bit of momentun)
         else {
             deltaX = Input.GetAxis("Horizontal");
         }
 
         //Jump if on Ground
-        if (Input.GetButtonDown("Jump")) {
-            deltaX = Input.GetAxis("Horizontal") * runSpeed;
+        if (Input.GetButtonDown("Jump") && isTouchingGround) {
             deltaY = jumpSpeed;
-        }
-        //Change Variables if was jumping and hitted the ground
-        else if (rigidbody.velocity.y == 0 && !isTouchingGround) {
-            deltaY = 0f;
+            Jump();
         }
         //Is On Air
         else if ((rigidbody.velocity.y > 0 || rigidbody.velocity.y < 0)) {
+            
+            //Is falling and came from a jump state
+            if (rigidbody.velocity.y < 0 && !isTouchingGround) {
+                jumping = false;
+                playerAnim.SetJump(jumping);
+            }
+            //Is falling and came from a jump state
+            else if (rigidbody.velocity.y < -minimumDeltaY && isTouchingGround) {
+                isTouchingGround = false;
+            }
+
             deltaY = rigidbody.velocity.y; 
-            print(deltaY);
+        }
+        //if was jumping / falling and hitted the ground
+        else if (rigidbody.velocity.y == 0 && !isTouchingGround) {
+            deltaY = 0f;
+            playerAnim.SetJump(jumping);
+            isTouchingGround = true;
         }
         //on Ground and not Jumping
         else {
@@ -96,6 +115,12 @@ public class PlayerMovement : MonoBehaviour
         rigidbody.velocity = vel;
     }
 
+    private void Jump() {
+        jumping = true;
+        playerAnim.SetJump(jumping);
+        isTouchingGround = false;
+    }
+
     private void ChangeDirection(float delta) {
 
         if (delta < 0 || (transform.localScale.x < 0 && delta == 0)) {
@@ -107,21 +132,20 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public void CrouchAfterJump() {
-
-    }
-
-    public void FinishCrouchJump() {
-        isTouchingGround = true;
-    }
-
-
     public void Fall() {
         isTouchingGround = false;
     }
 
-    public float GetYSpeed() {
-        return deltaY;
+    public bool IsMinimumSpeedY() {
+
+        if (rigidbody.velocity.y > -minimumDeltaY && rigidbody.velocity.y < minimumDeltaY) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
+
 
 }

@@ -24,6 +24,10 @@ public class HumanoidAnimations : MonoBehaviour
         objAnim.SetBool("Attacking", value);
     }
 
+    public void SetJump(bool value) {
+        objAnim.SetBool("Jumping", value);
+    }
+
     public void SetHit(bool value, int newHealth) {
 
         if (value) {
@@ -35,10 +39,4 @@ public class HumanoidAnimations : MonoBehaviour
         }
 
     }
-    /*
-    public void SetTime() {
-        objAnim.speed = timeMod;
-
-    }
-    */
 }
