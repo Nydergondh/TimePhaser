@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: 3b3ad56360f8b5342a7dc218d6ba48d1
+guid: 95df6e21cc13c37428171fb9059a1321
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1465442114630514430
-    second: Idle_SpriteSheet_0
+      213: -6341884459239670280
+    second: Character_Snap-Sheet_0
   - first:
-      213: 291016356998008702
-    second: Idle_SpriteSheet_1
+      213: 2999023306403067369
+    second: Character_Snap-Sheet_1
   - first:
-      213: 5460086296807752342
-    second: Idle_SpriteSheet_2
+      213: 1479738703238478969
+    second: Character_Snap-Sheet_2
   - first:
-      213: 7173244315590077772
-    second: Idle_SpriteSheet_3
+      213: 770022123779891198
+    second: Character_Snap-Sheet_3
   - first:
-      213: -1160325093310371271
-    second: Idle_SpriteSheet_4
+      213: 2969793143275914578
+    second: Character_Snap-Sheet_4
   - first:
-      213: -1753233565887606099
-    second: Idle_SpriteSheet_5
+      213: 8188496584544896964
+    second: Character_Snap-Sheet_5
   - first:
-      213: 3726399915596282619
-    second: Idle_SpriteSheet_6
+      213: -3824135406827337247
+    second: Character_Snap-Sheet_6
   - first:
-      213: 1830691935825054630
-    second: Idle_SpriteSheet_7
+      213: 5863356931899451998
+    second: Character_Snap-Sheet_7
   - first:
-      213: 7665833861948565438
-    second: Idle_SpriteSheet_8
+      213: 1233862933470882659
+    second: Character_Snap-Sheet_8
   - first:
-      213: 2499569290387568635
-    second: Idle_SpriteSheet_9
+      213: -357604533517004254
+    second: Character_Snap-Sheet_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -91,10 +91,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 1
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,57 +103,9 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 1
     textureFormat: 4
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 512
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: tvOS
-    maxTextureSize: 512
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 512
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 512
-    resizeAlgorithm: 0
-    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -165,91 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle_SpriteSheet_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 256
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2090d863924b9abe0800000000000000
-      internalID: -1465442114630514430
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle_SpriteSheet_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 256
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e7fc1b6b5d5e90400800000000000000
-      internalID: 291016356998008702
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle_SpriteSheet_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6924434ee8f16cb40800000000000000
-      internalID: 5460086296807752342
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle_SpriteSheet_3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c4d26d513bb7c8360800000000000000
-      internalID: 7173244315590077772
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle_SpriteSheet_4
+      name: Character_Snap-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -257,20 +125,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93a634da972b5efe0800000000000000
-      internalID: -1160325093310371271
+      spriteID: 8fdf2706fa91df7a0800000000000000
+      internalID: -6341884459239670280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_SpriteSheet_5
+      name: Character_Snap-Sheet_1
       rect:
         serializedVersion: 2
         x: 64
@@ -278,20 +146,62 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da25af06c534ba7e0800000000000000
-      internalID: -1753233565887606099
+      spriteID: 9e5b543cecbae9920800000000000000
+      internalID: 2999023306403067369
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_SpriteSheet_6
+      name: Character_Snap-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97c3de6b286198410800000000000000
+      internalID: 1479738703238478969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Snap-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff9715ba0bafaa00800000000000000
+      internalID: 770022123779891198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Snap-Sheet_4
       rect:
         serializedVersion: 2
         x: 0
@@ -299,20 +209,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfa792cdaf4d6b330800000000000000
-      internalID: 3726399915596282619
+      spriteID: 2550a511123d63920800000000000000
+      internalID: 2969793143275914578
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_SpriteSheet_7
+      name: Character_Snap-Sheet_5
       rect:
         serializedVersion: 2
         x: 64
@@ -320,20 +230,62 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ab4600cd9ce76910800000000000000
-      internalID: 1830691935825054630
+      spriteID: 4c74c46524263a170800000000000000
+      internalID: 8188496584544896964
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_SpriteSheet_8
+      name: Character_Snap-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e9001fcb11fdeac0800000000000000
+      internalID: -3824135406827337247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Snap-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5ae03d6014de5150800000000000000
+      internalID: 5863356931899451998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Snap-Sheet_8
       rect:
         serializedVersion: 2
         x: 0
@@ -341,20 +293,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb7ea983843826a60800000000000000
-      internalID: 7665833861948565438
+      spriteID: 36bad0bfccf8f1110800000000000000
+      internalID: 1233862933470882659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_SpriteSheet_9
+      name: Character_Snap-Sheet_9
       rect:
         serializedVersion: 2
         x: 64
@@ -362,14 +314,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf7b60db60140b220800000000000000
-      internalID: 2499569290387568635
+      spriteID: 22256a94298890bf0800000000000000
+      internalID: -357604533517004254
       vertices: []
       indices: 
       edges: []
@@ -383,7 +335,9 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: cf6997ae28f35664a95bdc97504854c1, type: 3}
+      name: _Emission
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
