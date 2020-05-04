@@ -35,10 +35,4 @@ public class HumanoidAnimations : MonoBehaviour
         }
 
     }
-    /*
-    public void SetTime() {
-        objAnim.speed = timeMod;
-
-    }
-    */
 }

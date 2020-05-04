@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float runSpeed = 3.5f;
     public float jumpSpeed = 5f;
+    private bool jumping;
 
     public float deltaX;
     public float deltaY;
@@ -70,9 +71,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Jump if on Ground
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump") && isTouchingGround) {
+
             deltaX = Input.GetAxis("Horizontal") * runSpeed;
             deltaY = jumpSpeed;
+
         }
         //Change Variables if was jumping and hitted the ground
         else if (rigidbody.velocity.y == 0 && !isTouchingGround) {
@@ -106,15 +109,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
-    public void CrouchAfterJump() {
-
-    }
-
-    public void FinishCrouchJump() {
-        isTouchingGround = true;
-    }
-
 
     public void Fall() {
         isTouchingGround = false;

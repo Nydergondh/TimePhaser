@@ -16,21 +16,17 @@ public class PlayerGroundCollision : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         //if is jumping and touch the ground
         if (feetCollider.IsTouchingLayers(groundLayer) && PlayerMovement.player.deltaY != 0) {
-            PlayerMovement.player.CrouchAfterJump();
             PlayerMovement.player.isTouchingGround = true;
         }
         //if is not jumping, but is falling and touch the ground
         else if (feetCollider.IsTouchingLayers(groundLayer) && PlayerMovement.player.deltaY != 0) {
-            if (PlayerMovement.player.GetYSpeed() < PlayerMovement.player.deltaYMinimum) {
-                PlayerMovement.player.CrouchAfterJump();
-            }
             PlayerMovement.player.isTouchingGround = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.layer == 8) {
-            if (!feetCollider.IsTouchingLayers(groundLayer)) {
+            if (!feetCollider.IsTouchingLayers(groundLayer) && PlayerMovement.player.deltaY <= 0) {
                 PlayerMovement.player.Fall();
             }
         }
