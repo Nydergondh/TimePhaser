@@ -32,4 +32,4 @@ Material:
     - _DSpeed: 0.05
     - _Dissolve: 1
     m_Colors:
-    - _Grow: {r: 5.992157, g: 1.4117647, b: 0, a: 0}
+    - _Grow: {r: 2.9960785, g: 0.0627451, b: 0, a: 0}
