@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerAnimations : HumanoidAnimations {
 
-    public void SetPlayerWeapon(int value) {
-        objAnim.SetInteger("WeaponId", value);
+    public void SetPlayerTimeBubble(bool value) {
+        objAnim.SetBool("TimeBubble", value);
     }
 
 }

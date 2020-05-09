@@ -14,16 +14,18 @@ public class PlayerMovement : MonoBehaviour
 
     public float deltaX;
 
-    public float minimumDeltaY = 0.01f;
+    public float minimumDeltaY = 0.1f;
     public float deltaY;  
 
     public bool isTouchingGround;
 
-    //public LayerMask groundLayer;
-    //public LayerMask enemyLayer;
+    private bool freezeMovement;
+
+    public LayerMask groundLayer;
 
     private SpriteRenderer playerRenderer;
     public new Rigidbody2D rigidbody { get; set; }
+    public BoxCollider2D feetCollider;
 
     private PlayerAnimations playerAnim;
 
@@ -50,15 +52,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update() {
 
-        Movement(); //(TODO: add restriction when attacking)      
+        Movement(); //(TODO: add restriction when attacking)    
         
-        if (isTouchingGround && rigidbody.velocity.y <= 0f) {//0.5f is the maximum (TODO: add restriction when attacking)
-            rigidbody.drag = 5f;
-        }
-        else {
-            rigidbody.drag = 0f;
-        }
-
     }
 
     private void Movement() {
@@ -82,14 +77,14 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
         //Is On Air
-        else if ((rigidbody.velocity.y > 0 || rigidbody.velocity.y < 0)) {
-            
-            //Is falling and came from a jump state
+        else if ((deltaY > 0 || deltaY < 0)) {
+
+            //Is falling and DID came from a jump state
             if (rigidbody.velocity.y < 0 && !isTouchingGround) {
                 jumping = false;
                 playerAnim.SetJump(jumping);
             }
-            //Is falling and came from a jump state
+            //Is falling and DID NOT came from a jump state
             else if (rigidbody.velocity.y < -minimumDeltaY && isTouchingGround) {
                 isTouchingGround = false;
             }
@@ -97,14 +92,19 @@ public class PlayerMovement : MonoBehaviour
             deltaY = rigidbody.velocity.y; 
         }
         //if was jumping / falling and hitted the ground
-        else if (rigidbody.velocity.y == 0 && !isTouchingGround) {
+        else if (rigidbody.velocity.y < minimumDeltaY && !isTouchingGround) {
             deltaY = 0f;
             playerAnim.SetJump(jumping);
             isTouchingGround = true;
         }
-        //on Ground and not Jumping
+        ////on Ground and not Jumping
         else {
-            deltaY = rigidbody.velocity.y;
+            if (feetCollider.IsTouchingLayers(groundLayer)) {
+                deltaY = 0;
+            }
+            else {
+                deltaY = rigidbody.velocity.y;
+            }
         }
 
         ChangeDirection(deltaX);
@@ -136,16 +136,11 @@ public class PlayerMovement : MonoBehaviour
         isTouchingGround = false;
     }
 
-    public bool IsMinimumSpeedY() {
-
-        if (rigidbody.velocity.y > -minimumDeltaY && rigidbody.velocity.y < minimumDeltaY) {
-            return true;
-        }
-        else {
-            return false;
-        }
-
+    public void FreezeMovement() {
+        freezeMovement = true;
     }
 
-
+    public void UnfreezeMovement() {
+        freezeMovement = false;
+    }
 }

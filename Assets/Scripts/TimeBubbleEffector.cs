@@ -39,4 +39,8 @@ public class TimeBubbleEffector : MonoBehaviour
         }
     }
     
+    public void KillBubble() {
+        Destroy(gameObject, 2f);
+    }
+
 }
