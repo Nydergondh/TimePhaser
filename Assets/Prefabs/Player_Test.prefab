@@ -117,10 +117,10 @@ MonoBehaviour:
   runSpeed: 3
   jumpSpeed: 5
   airSpeed: 3
-  gravityModifier: 0.5
   deltaX: 0
+  minimumDeltaY: 0.01
   deltaY: 0
-  isGrounded: 0
+  isTouchingGround: 0
 --- !u!114 &7426176956719797460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31a0192749349244bb5cad3fbd6836fc, type: 2}
+  - {fileID: 2100000, guid: 16419f64b512e824fadeb66fdece6fdd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
