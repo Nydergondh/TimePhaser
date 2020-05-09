@@ -4,31 +4,38 @@ using UnityEngine;
 
 public class TimeBubbleEffector : MonoBehaviour
 {
-    public int layerMask = 9;
+    public LayerMask effectedLayers;
+
+    private Collider2D bubbleCollider;
     [Range(0.0F, 1.0F)]
     public float timeModifier = 0.25f;
+    private float normalTimeModiffier = 4;
+
+    private Animator anim;
+
+    private void Start() {
+        bubbleCollider = GetComponent<Collider2D>();
+    }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject.layer == layerMask) {
+        if (bubbleCollider.IsTouchingLayers(effectedLayers)) {
             //slow down animator
-            GetComponent<Animator>().speed = timeModifier;
-            //slow down speed
-            //TODO: change to enemy attributes
-            GetComponent<PlayerMovement>().runSpeed = timeModifier * 5; 
-            GetComponent<PlayerMovement>().airSpeed = timeModifier * 3;
-            GetComponent<PlayerMovement>().jumpSpeed = timeModifier * 5;
+            if (collision.GetComponent<Animator>() != null) {
+                collision.GetComponent<Animator>().speed = timeModifier;
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.layer == layerMask) {
+
+        if (effectedLayers.value == (effectedLayers | (1 << collision.gameObject.layer))) {
             //slow down animator
-            GetComponent<Animator>().speed = 1f;
-            //slow down speed
-            print("GotHere1");
-            GetComponent<PlayerMovement>().runSpeed = 5;
-            GetComponent<PlayerMovement>().airSpeed = 3;
-            GetComponent<PlayerMovement>().jumpSpeed = 5;
+            if (collision.GetComponent<Animator>() != null) {
+                collision.GetComponent<Animator>().speed = normalTimeModiffier;
+            }
+            //if (collision.GetComponent<>() {
+
+            //}
         }
     }
     
