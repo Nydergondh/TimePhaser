@@ -8,7 +8,7 @@ public class PlayerCombat : MonoBehaviour
     public GameObject bubblePrefab;
     public Transform bubbleParent;
 
-    public float timeBubbleCD = 0f;
+    public float timeBubbleCD = 4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +22,7 @@ public class PlayerCombat : MonoBehaviour
 
             playerAnim.SetPlayerTimeBubble(true);
 
-            timeBubbleCD = 2f;
+            timeBubbleCD = 4f;
             PlayerMovement.player.FreezeMovement();
         }
 
