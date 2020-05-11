@@ -18,24 +18,29 @@ public class TimeBubbleEffector : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
+        print(collision.gameObject.name + " Entered");
         if (bubbleCollider.IsTouchingLayers(effectedLayers)) {
             //slow down animator
-            if (collision.GetComponent<Animator>() != null) {
-                collision.GetComponent<Animator>().speed = timeModifier;
+            if (collision.GetComponent<Enemy>()) {
+                if (collision.GetComponent<Animator>() != null) {
+                    collision.GetComponent<Animator>().speed = timeModifier;
+                }
+                collision.GetComponent<Enemy>().movementSpeed = timeModifier;
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-
+        print(collision.gameObject.name +" Exited");
         if (effectedLayers.value == (effectedLayers | (1 << collision.gameObject.layer))) {
             //slow down animator
-            if (collision.GetComponent<Animator>() != null) {
-                collision.GetComponent<Animator>().speed = normalTimeModiffier;
+            if (collision.GetComponent<Enemy>()) {
+                if (collision.GetComponent<Animator>() != null) {
+                    collision.GetComponent<Animator>().speed *= normalTimeModiffier;
+                }
+                collision.GetComponent<Enemy>().movementSpeed *= normalTimeModiffier;
             }
-            //if (collision.GetComponent<>() {
 
-            //}
         }
     }
     
