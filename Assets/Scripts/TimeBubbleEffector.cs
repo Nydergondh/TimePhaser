@@ -9,7 +9,7 @@ public class TimeBubbleEffector : MonoBehaviour
     private Collider2D bubbleCollider;
     [Range(0.0F, 1.0F)]
     public float timeModifier = 0.25f;
-    private float normalTimeModiffier = 4;
+    private float normalTimeModiffier = 1;
 
     private Animator anim;
 
@@ -36,9 +36,9 @@ public class TimeBubbleEffector : MonoBehaviour
             //slow down animator
             if (collision.GetComponent<Enemy>()) {
                 if (collision.GetComponent<Animator>() != null) {
-                    collision.GetComponent<Animator>().speed *= normalTimeModiffier;
+                    collision.GetComponent<Animator>().speed = normalTimeModiffier;
                 }
-                collision.GetComponent<Enemy>().movementSpeed *= normalTimeModiffier;
+                collision.GetComponent<Enemy>().movementSpeed = normalTimeModiffier;
             }
 
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,16 @@ public class PlayerCombat : MonoBehaviour
     public GameObject bubblePrefab;
     public Transform bubbleParent;
 
+    private float bubbleTimer = 0f;
     public float timeBubbleCD = 4f;
+
+    //private float attackTimer = 0f;
+    //public float timeAttackCD = 4f;
+
+    [SerializeField]
+    private bool isAttacking = false;
+    [SerializeField]
+    private bool isTimeBubbling = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,28 +28,52 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && timeBubbleCD <= 0) {
+        if (!isAttacking) {
+            if (Input.GetKeyDown(KeyCode.Q) && bubbleTimer <= 0) {
 
-            playerAnim.SetPlayerTimeBubble(true);
+                SetPlayerBubble();
 
-            timeBubbleCD = 4f;
-            PlayerMovement.player.FreezeMovement();
+                bubbleTimer = timeBubbleCD;
+                PlayerMovement.player.FreezeMovement();
+            }
+
+            if (bubbleTimer > 0) {
+                bubbleTimer -= Time.deltaTime;
+            }
         }
+        if (!isTimeBubbling) {
+            if (Input.GetMouseButtonDown(0) && !isAttacking) {
 
-        if (timeBubbleCD > 0) {
-            timeBubbleCD -= Time.deltaTime;
+                SetPlayerAttack();
+
+                PlayerMovement.player.FreezeMovement();
+            }
+
         }
     }
+
 
     public void InstaciateTimeBubble() {
         Instantiate(bubblePrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity, bubbleParent);
     }
 
-    public void UnsetPlayerBubble() {
-        playerAnim.SetPlayerTimeBubble(false);
+    private void SetPlayerAttack() {
+        playerAnim.SetAttack(true);
+        isAttacking = true;
+    }
+
+    public void UnsetPlayerAttack() {
+        playerAnim.SetAttack(false);
+        isAttacking = false;
     }
 
     public void SetPlayerBubble() {
         playerAnim.SetPlayerTimeBubble(true);
+        isTimeBubbling = true;
+    }
+
+    public void UnsetPlayerBubble() {
+        playerAnim.SetPlayerTimeBubble(false);
+        isTimeBubbling = false;
     }
 }
