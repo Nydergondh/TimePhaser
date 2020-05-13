@@ -15,6 +15,7 @@ public class TimeBubbleEffector : MonoBehaviour
 
     private void Start() {
         bubbleCollider = GetComponent<Collider2D>();
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
@@ -33,7 +34,7 @@ public class TimeBubbleEffector : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision) {
         print(collision.gameObject.name +" Exited");
         if (effectedLayers.value == (effectedLayers | (1 << collision.gameObject.layer))) {
-            //slow down animator
+            //speed up animator
             if (collision.GetComponent<SpokyEnemy>()) {
                 if (collision.GetComponent<Animator>() != null) {
                     collision.GetComponent<Animator>().speed = normalTimeModiffier;

@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Color: {r: 0.6745283, g: 0.9454495, b: 1, a: 1}
   m_Intensity: 1.5
   m_LightVolumeOpacity: 0.015
-  m_ApplyToSortingLayers: 00000000e50b633a
+  m_ApplyToSortingLayers: 000000009922b8f39917d8029dabfaccf1580c62e50b633a
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -82,6 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3691647028811930543}
   - component: {fileID: 6059690314704388518}
+  - component: {fileID: 703148054}
   m_Layer: 0
   m_Name: StreetLamp_Victorian
   m_TagString: Untagged
@@ -124,6 +125,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &703148054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691647028811930528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212026c1d8ac9a543add279fee3806f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerMaxTime: 5
+  flickerMinTime: 2.5
 --- !u!1 &3691647028898309699
 GameObject:
   m_ObjectHideFlags: 0
