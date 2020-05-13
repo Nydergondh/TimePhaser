@@ -30,13 +30,14 @@ public class SpokyVision : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        _pointA = new Vector2(_spoky.spookyEyes.position.x + visionMimRange, _spoky.spookyEyes.position.y - (areaSizeY / 2));
-        _pointB = new Vector2(_spoky.spookyEyes.position.x + visionMaxRange, _spoky.spookyEyes.position.y + (areaSizeY / 2));
+        if (_spoky.health > 0) {
+            _pointA = new Vector2(_spoky.spookyEyes.position.x + visionMimRange, _spoky.spookyEyes.position.y - (areaSizeY / 2));
+            _pointB = new Vector2(_spoky.spookyEyes.position.x + visionMaxRange, _spoky.spookyEyes.position.y + (areaSizeY / 2));
 
-        FlipPoints();
+            FlipPoints();
 
-        PersuitPlayer();
-
+            PersuitPlayer();
+        }
     }
 
     private void PersuitPlayer() {

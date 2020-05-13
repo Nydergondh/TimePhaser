@@ -42,15 +42,17 @@ public class SpokyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_spoky.spokyVision.seeingPlayer && !_spoky.spokyCombat.inSpookRange) {
-            Wander();
-        }
-        else {
-            if (!_spoky.spokyCombat.inSpookRange && !_spoky.spokyCombat.isSpooking) {
-                Movement(PlayerMovement.player.transform.position);
+        if (_spoky.health > 0) {
+            if (!_spoky.spokyVision.seeingPlayer && !_spoky.spokyCombat.inSpookRange) {
+                Wander();
             }
             else {
-                _enemyAnim.SetVelocity(Vector2.zero);
+                if (!_spoky.spokyCombat.inSpookRange && !_spoky.spokyCombat.isSpooking) {
+                    Movement(PlayerMovement.player.transform.position);
+                }
+                else {
+                    _enemyAnim.SetVelocity(Vector2.zero);
+                }
             }
         }
     }

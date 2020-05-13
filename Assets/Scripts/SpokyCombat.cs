@@ -41,16 +41,18 @@ public class SpokyCombat : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
+        if (_spoky.health > 0) {
 
-        _pointA = new Vector2(_spoky.spookyEyes.position.x + attackMimRange, _spoky.spookyEyes.position.y - (areaSizeY / 2));
-        _pointB = new Vector2(_spoky.spookyEyes.position.x + attackMaxRange, _spoky.spookyEyes.position.y + (areaSizeY / 2));
+            _pointA = new Vector2(_spoky.spookyEyes.position.x + attackMimRange, _spoky.spookyEyes.position.y - (areaSizeY / 2));
+            _pointB = new Vector2(_spoky.spookyEyes.position.x + attackMaxRange, _spoky.spookyEyes.position.y + (areaSizeY / 2));
 
-        FlipPoints();
+            FlipPoints();
 
-        CanAttackPlayer();
+            CanAttackPlayer();
 
-        if (inSpookRange) {
-            SetAttackAnim();
+            if (inSpookRange) {
+                SetAttackAnim();
+            }
         }
     }
 
@@ -76,16 +78,20 @@ public class SpokyCombat : MonoBehaviour, IDamageable
     }
 
     public void OnDamage(int damage) {
-        _spoky.health -= damage;
         if (_spoky.health > 0) {
-
-            if (!isSpooking) {
-                isSpoked = true;
+            _spoky.health -= damage;
+            if (_spoky.health > 0) {
+                if (!isSpooking) {
+                    isSpoked = true;
+                }
+                StartCoroutine(ChangeColor());
             }
-
-            StartCoroutine(ChangeColor());
+            else {
+                print("Here");
+                Destroy(gameObject,3f);
+            }
+            _spokyAnim.SetHit(true, _spoky.health); //play the animation]
         }
-        _spokyAnim.SetHit(true,_spoky.health); //play the animation
     }
 
 
