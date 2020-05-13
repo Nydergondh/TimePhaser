@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkelyWander : MonoBehaviour
+public class SpokyMovement : MonoBehaviour
 {
     public LayerMask groundLayer;
 
-    private Enemy _enemyComponent;
+    private SpokyEnemy _spoky;
 
     private float _minimumTargetDistance = 0.1f;
     private float _xOffset = 0.5F;
@@ -18,8 +18,6 @@ public class SkelyWander : MonoBehaviour
 
     private Collider2D _collider;
 
-    [SerializeField]
-    private Transform enemyEyes;
     public float wanderRange = 2.5f;
 
     private Vector2 _wanderPos;
@@ -30,11 +28,13 @@ public class SkelyWander : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _spoky = GetComponent<SpokyEnemy>();
+
         SetWanderDestination();
+
         _oldWanderPos = transform.position;
         _wanderPos = transform.position;
 
-        _enemyComponent = GetComponent<Enemy>();
         _enemyAnim = GetComponent<HumanoidAnimations>();
         _collider = GetComponent<Collider2D>();
     }
@@ -42,10 +42,24 @@ public class SkelyWander : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_spoky.spokyVision.seeingPlayer && !_spoky.spokyCombat.inSpookRange) {
+            Wander();
+        }
+        else {
+            if (!_spoky.spokyCombat.inSpookRange && !_spoky.spokyCombat.isSpooking) {
+                Movement(PlayerMovement.player.transform.position);
+            }
+            else {
+                _enemyAnim.SetVelocity(Vector2.zero);
+            }
+        }
+    }
+
+    private void Wander() {
         if (wanderTimer < 0) {
 
-            if(Vector2.Distance(transform.position, _wanderPos) >= _minimumTargetDistance) {
-                Movement();
+            if (Vector2.Distance(transform.position, _wanderPos) >= _minimumTargetDistance) {
+                Movement(_wanderPos);
                 ChangeDirection();
             }
             else {
@@ -59,14 +73,13 @@ public class SkelyWander : MonoBehaviour
         else {
             wanderTimer -= Time.deltaTime;
         }
-
     }
 
-    private void Movement() {
+    private void Movement(Vector2 target) {
         float velX;
         Vector2 velocity;
         
-        velX = Mathf.MoveTowards(transform.position.x,_wanderPos.x, _enemyComponent.movementSpeed * Time.deltaTime);
+        velX = Mathf.MoveTowards(transform.position.x, target.x, _spoky.movementSpeed * Time.deltaTime);
         velocity = new Vector2(velX, transform.position.y);
 
         transform.position = velocity;
@@ -83,19 +96,19 @@ public class SkelyWander : MonoBehaviour
         float leftTarget;
 
         //raycast rigth
-        raycastHitRigth = Physics2D.Raycast(enemyEyes.position, Vector2.right, wanderRange, groundLayer);
+        raycastHitRigth = Physics2D.Raycast(_spoky.spookyEyes.position, Vector2.right, wanderRange, groundLayer);
         //raycast left
-        raycastHitLeft = Physics2D.Raycast(enemyEyes.position, Vector2.left, wanderRange, groundLayer);
+        raycastHitLeft = Physics2D.Raycast(_spoky.spookyEyes.position, Vector2.left, wanderRange, groundLayer);
 
         #region CHECKING WHERE TO PUT WANDER POINTS
-        if (raycastHitRigth = Physics2D.Raycast(enemyEyes.position, Vector2.right, wanderRange, groundLayer)) {
+        if (raycastHitRigth = Physics2D.Raycast(_spoky.spookyEyes.position, Vector2.right, wanderRange, groundLayer)) {
             rigthTarget = Random.Range(transform.position.x + _xOffset, raycastHitRigth.point.x - _xOffset);
         }
         else {
             rigthTarget = Random.Range(transform.position.x + _xOffset, (transform.position.x + wanderRange));
         }
 
-        if (raycastHitLeft = Physics2D.Raycast(enemyEyes.position, Vector2.left, wanderRange, groundLayer)) {
+        if (raycastHitLeft = Physics2D.Raycast(_spoky.spookyEyes.position, Vector2.left, wanderRange, groundLayer)) {
             leftTarget = Random.Range(transform.position.x - _xOffset, raycastHitLeft.point.x + _xOffset);
         }
         else {
@@ -155,7 +168,14 @@ public class SkelyWander : MonoBehaviour
 
     }
 
-    //private void OnTriggerExit2D(Collider2D collision) {
-    //    print("OFF limits! Gonna fall");
-    //}
+    public void PersuitPlayer(bool value) {
+        if (value) {
+            _spoky.spokyVision.seeingPlayer = true;
+            wanderTimer = timeToWait;
+        }
+        else {
+            _spoky.spokyVision.seeingPlayer = false;
+        }
+    }
+
 }

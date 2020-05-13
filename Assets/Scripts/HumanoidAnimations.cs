@@ -31,12 +31,16 @@ public class HumanoidAnimations : MonoBehaviour
     public void SetHit(bool value, int newHealth) {
 
         if (value) {
-            objAnim.SetFloat("Health", newHealth);
+            objAnim.SetInteger("Health", newHealth);
         }
 
-        if (objAnim.GetFloat("Health") > 0) {
+        if (objAnim.GetInteger("Health") > 0) {
             objAnim.SetBool("Hitted", value);
         }
 
+    }
+
+    public void SetHit(bool value) {
+        objAnim.SetBool("Hitted", value);
     }
 }

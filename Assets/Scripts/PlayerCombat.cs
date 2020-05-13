@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat : MonoBehaviour, IDamageable
 {
     private PlayerAnimations playerAnim;
     public GameObject bubblePrefab;
@@ -12,8 +12,9 @@ public class PlayerCombat : MonoBehaviour
     private float bubbleTimer = 0f;
     public float timeBubbleCD = 4f;
 
-    //private float attackTimer = 0f;
-    //public float timeAttackCD = 4f;
+    [SerializeField]
+    private int health = 100;
+    public int damage = 50;
 
     [SerializeField]
     private bool isAttacking = false;
@@ -55,6 +56,10 @@ public class PlayerCombat : MonoBehaviour
 
     public void InstaciateTimeBubble() {
         Instantiate(bubblePrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity, bubbleParent);
+    }
+
+    public void OnDamage(int damage) {
+        //print("GOT HIT! (Player)");
     }
 
     private void SetPlayerAttack() {

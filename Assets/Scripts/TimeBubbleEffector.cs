@@ -21,11 +21,11 @@ public class TimeBubbleEffector : MonoBehaviour
         print(collision.gameObject.name + " Entered");
         if (bubbleCollider.IsTouchingLayers(effectedLayers)) {
             //slow down animator
-            if (collision.GetComponent<Enemy>()) {
+            if (collision.GetComponent<SpokyEnemy>()) {
                 if (collision.GetComponent<Animator>() != null) {
                     collision.GetComponent<Animator>().speed = timeModifier;
                 }
-                collision.GetComponent<Enemy>().movementSpeed = timeModifier;
+                collision.GetComponent<SpokyEnemy>().movementSpeed = timeModifier;
             }
         }
     }
@@ -34,11 +34,11 @@ public class TimeBubbleEffector : MonoBehaviour
         print(collision.gameObject.name +" Exited");
         if (effectedLayers.value == (effectedLayers | (1 << collision.gameObject.layer))) {
             //slow down animator
-            if (collision.GetComponent<Enemy>()) {
+            if (collision.GetComponent<SpokyEnemy>()) {
                 if (collision.GetComponent<Animator>() != null) {
                     collision.GetComponent<Animator>().speed = normalTimeModiffier;
                 }
-                collision.GetComponent<Enemy>().movementSpeed = normalTimeModiffier;
+                collision.GetComponent<SpokyEnemy>().movementSpeed = normalTimeModiffier;
             }
 
         }

@@ -15,8 +15,8 @@ TagManager:
   - 
   - GroundLayer
   - TimeBubble
-  - Enemy
-  - 
+  - Spokey
+  - Player
   - 
   - 
   - 
@@ -49,4 +49,10 @@ TagManager:
     locked: 0
   - name: Cursor
     uniqueID: 47716249
+    locked: 0
+  - name: Player
+    uniqueID: 3438979997
+    locked: 0
+  - name: Enemies
+    uniqueID: 1644976369
     locked: 0
