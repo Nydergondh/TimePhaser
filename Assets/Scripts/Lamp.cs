@@ -16,7 +16,6 @@ public class Lamp : MonoBehaviour
     {
         animLamp = GetComponent<Animator>();
 
-
         hashFlicker = Animator.StringToHash("Malfunction");
 
         SetFlcikeringTime();

@@ -43,15 +43,18 @@ public class SpokyMovement : MonoBehaviour
     void Update()
     {
         if (_spoky.health > 0) {
-            if (!_spoky.spokyVision.seeingPlayer && !_spoky.spokyCombat.inSpookRange) {
+            if (!_spoky.spokyVision.seeingPlayer && !_spoky.spokyCombat.inSpookRange) { // player is not in vision 
                 Wander();
+                print("GotHere1");
             }
-            else {
-                if (!_spoky.spokyCombat.inSpookRange && !_spoky.spokyCombat.isSpooking) {
+            else { 
+                if (!_spoky.spokyCombat.inSpookRange && !_spoky.spokyCombat.isSpooking) { // player is in vision
                     Movement(PlayerMovement.player.transform.position);
+                    print("GotHere2");
                 }
-                else {
+                else { //is attacking player
                     _enemyAnim.SetVelocity(Vector2.zero);
+                    print("GotHere3");
                 }
             }
         }
@@ -74,6 +77,7 @@ public class SpokyMovement : MonoBehaviour
         }
         else {
             wanderTimer -= Time.deltaTime;
+            _enemyAnim.SetVelocity(Vector2.zero);
         }
     }
 
@@ -86,7 +90,12 @@ public class SpokyMovement : MonoBehaviour
 
         transform.position = velocity;
 
-        _enemyAnim.SetVelocity(velocity);
+        if (transform.position.x >= target.x) {
+            _enemyAnim.SetVelocity(new Vector2 (_spoky.movementSpeed,transform.position.y));
+        }
+        else if (transform.position.x < target.x) {
+            _enemyAnim.SetVelocity(new Vector2(-_spoky.movementSpeed, transform.position.y));
+        }
     }
 
     private void SetWanderDestination() {

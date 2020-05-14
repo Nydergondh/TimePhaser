@@ -44,15 +44,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Effects
-    uniqueID: 4088930969
-    locked: 0
-  - name: Cursor
-    uniqueID: 47716249
-    locked: 0
   - name: Player
     uniqueID: 3438979997
     locked: 0
   - name: Enemies
     uniqueID: 1644976369
+    locked: 0
+  - name: Effects
+    uniqueID: 4088930969
+    locked: 0
+  - name: Cursor
+    uniqueID: 47716249
     locked: 0

@@ -153,4 +153,12 @@ public class PlayerMovement : MonoBehaviour
         freezeMovement = false;
         rigidbody.gravityScale = 1;
     }
+
+    public IEnumerator MiniFreezePlayer() {
+        if (!freezeMovement) { 
+            FreezeMovement();
+            yield return new WaitForSeconds(0.1f);
+            UnfreezeMovement();
+        }
+    }
 }

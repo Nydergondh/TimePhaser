@@ -18,17 +18,21 @@ public class CameraFollow : MonoBehaviour
 
     void Start() {
         desiredPostion = new Vector2(player.position.x, player.position.y + OffsetY);
+        transform.position = desiredPostion;
     }
     void Update()
     {
-        desiredPostion = new Vector2(player.position.x, player.position.y + OffsetY);
-        lerpPosition = Vector2.Lerp(transform.position, desiredPostion, smoothSpeed * Time.deltaTime);
+        desiredPostion = new Vector2(player.position.x, player.position.y);
+        transform.position = desiredPostion;
 
-        if (Mathf.Abs(player.position.y - transform.position.y) < 0.01) {
-            transform.position = new Vector3(player.position.x, transform.position.y + OffsetY, transform.position.z);
-        }
-        else {
-            transform.position = new Vector3(lerpPosition.x, lerpPosition.y, transform.position.z);
-        }
+        //desiredPostion = new Vector2(player.position.x, player.position.y + OffsetY);
+        //lerpPosition = Vector2.Lerp(transform.position, desiredPostion, smoothSpeed * Time.deltaTime);
+
+        //if (Mathf.Abs(player.position.y - transform.position.y) < 0.01) {
+        //    transform.position = new Vector3(player.position.x, transform.position.y + OffsetY, transform.position.z);
+        //}
+        //else {
+        //    transform.position = new Vector3(lerpPosition.x, lerpPosition.y, transform.position.z);
+        //}
     }
 }

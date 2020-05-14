@@ -10,7 +10,9 @@ public class PlayerDamage : MonoBehaviour
         if (spokyLayer == (spokyLayer | 1 << collision.gameObject.layer)) {
             if (collision.GetComponent<IDamageable>() != null) {
                 collision.GetComponent<IDamageable>().OnDamage(GetComponentInParent<PlayerCombat>().damage);
+                //StartCoroutine(PlayerMovement.player.MiniFreezePlayer());
             }
         }
     }
+
 }

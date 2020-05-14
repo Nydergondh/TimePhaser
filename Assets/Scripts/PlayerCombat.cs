@@ -45,8 +45,10 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         if (!isTimeBubbling) {
             if (Input.GetMouseButtonDown(0) && !isAttacking) {
 
-                SetPlayerAttack();
+                //if (PlayerMovement.player.deltaY <= -PlayerMovement.player.minimumDeltaY || PlayerMovement.player.deltaY >= PlayerMovement.player.minimumDeltaY) {
 
+                //}
+                SetPlayerAttack();
                 PlayerMovement.player.FreezeMovement();
             }
 
@@ -59,7 +61,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     }
 
     public void OnDamage(int damage) {
-        //print("GOT HIT! (Player)");
+        print("GOT HIT! (Player)");
     }
 
     private void SetPlayerAttack() {
