@@ -19,7 +19,6 @@ public class TimeBubbleEffector : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        print(collision.gameObject.name + " Entered");
         if (bubbleCollider.IsTouchingLayers(effectedLayers)) {
             //slow down animator
             if (collision.GetComponent<SpokyEnemy>()) {
@@ -32,7 +31,6 @@ public class TimeBubbleEffector : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        print(collision.gameObject.name +" Exited");
         if (effectedLayers.value == (effectedLayers | (1 << collision.gameObject.layer))) {
             //speed up animator
             if (collision.GetComponent<SpokyEnemy>()) {

@@ -25,7 +25,7 @@ public class SpokyCombat : MonoBehaviour, IDamageable
     public LayerMask playerLayer;
 
     public float colorChangeTimer = 0;
-    public float colorChangeCD = 1f;
+    public float colorChangeCD = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -84,10 +84,11 @@ public class SpokyCombat : MonoBehaviour, IDamageable
                 if (!isSpooking) {
                     isSpoked = true;
                 }
-                StartCoroutine(ChangeColor());
+                if (colorChangeTimer <= 0) {
+                    StartCoroutine(ChangeColor());
+                }
             }
             else {
-                print("Here");
                 Destroy(gameObject,3f);
             }
             _spokyAnim.SetHit(true, _spoky.health); //play the animation]
@@ -112,24 +113,30 @@ public class SpokyCombat : MonoBehaviour, IDamageable
     }
 
     public IEnumerator ChangeColor() {
-        print("Started Courotine Going Up");
-        print(_spoky._renderer.material);
-        while (colorChangeTimer < colorChangeCD) {
 
-            colorChangeTimer += 0.1f;
-            _spoky._renderer.material.SetFloat("_Hit", colorChangeTimer);
+        int i = 0;
+        float aux = 0;
+
+        while (colorChangeTimer < colorChangeCD) {
+            colorChangeTimer += Time.deltaTime;
+            _spoky._renderer.material.SetFloat("_Hit", 1);
+
+            i++;
+            aux += Time.deltaTime;
 
             if (colorChangeTimer >= colorChangeCD) {
-                colorChangeTimer = 1f;
+                colorChangeTimer = colorChangeCD;
             }
 
             yield return null;
         }
-        print("Started Courotine Going Down");
-        while (colorChangeTimer > 0) {
 
-            colorChangeTimer -= 0.1f;
+        while (colorChangeTimer > 0) {
+            colorChangeTimer -= Time.deltaTime;
             _spoky._renderer.material.SetFloat("_Hit", colorChangeTimer);
+
+            i++;
+            aux += Time.deltaTime;
 
             if (colorChangeTimer <= 0) {
                 colorChangeTimer = 0;
@@ -137,8 +144,9 @@ public class SpokyCombat : MonoBehaviour, IDamageable
 
             yield return null;
         }
+        print(i + " " +aux);
     }
-
+    
     private void OnDrawGizmosSelected() {
 
         try { 

@@ -8,4 +8,7 @@ public class PlayerAnimations : HumanoidAnimations {
         objAnim.SetBool("TimeBubble", value);
     }
 
+    public void SetPlayerDash(bool value) {
+        objAnim.SetBool("Dash", value);
+    }
 }

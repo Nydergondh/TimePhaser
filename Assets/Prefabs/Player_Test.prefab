@@ -45,7 +45,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.3110937, y: 0.26858413}
+  m_Offset: {x: 0.45035842, y: 0.26648033}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.30052227, y: 0.41645694}
+  m_Size: {x: 0.5790518, y: 0.3701694}
   m_EdgeRadius: 0
 --- !u!114 &1787744240
 MonoBehaviour:
@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 9208431601635120295}
   - component: {fileID: 9208431601635120294}
   - component: {fileID: 9208431601635120297}
+  - component: {fileID: 4823861446241378590}
   - component: {fileID: 9208431601635120296}
   - component: {fileID: 9208431601635120299}
   - component: {fileID: 9208431601635120298}
@@ -264,8 +265,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.27}
-  m_Size: {x: 0.25, y: 0.5}
+  m_Offset: {x: 0, y: 0.27493858}
+  m_Size: {x: 0.25, y: 0.4901228}
   m_Direction: 0
 --- !u!50 &9208431601635120294
 Rigidbody2D:
@@ -307,6 +308,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4823861446241378590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9208431601635120300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fc9a64589d5f143a1ddbf38bb56e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
+  playerCombat: {fileID: 0}
 --- !u!114 &9208431601635120296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 3
+  dashSpeed: 5
   jumpSpeed: 5
   airSpeed: 3
   deltaX: 0
@@ -346,7 +362,6 @@ MonoBehaviour:
     type: 3}
   bubbleParent: {fileID: 0}
   timeBubbleCD: 4
-  health: 100
   damage: 50
   isAttacking: 0
   isTimeBubbling: 0

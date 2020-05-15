@@ -45,16 +45,13 @@ public class SpokyMovement : MonoBehaviour
         if (_spoky.health > 0) {
             if (!_spoky.spokyVision.seeingPlayer && !_spoky.spokyCombat.inSpookRange) { // player is not in vision 
                 Wander();
-                print("GotHere1");
             }
             else { 
                 if (!_spoky.spokyCombat.inSpookRange && !_spoky.spokyCombat.isSpooking) { // player is in vision
-                    Movement(PlayerMovement.player.transform.position);
-                    print("GotHere2");
+                    Movement(PlayerStatus.player.transform.position);
                 }
                 else { //is attacking player
                     _enemyAnim.SetVelocity(Vector2.zero);
-                    print("GotHere3");
                 }
             }
         }

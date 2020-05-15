@@ -12,8 +12,6 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     private float bubbleTimer = 0f;
     public float timeBubbleCD = 4f;
 
-    [SerializeField]
-    private int health = 100;
     public int damage = 50;
 
     [SerializeField]
@@ -33,9 +31,9 @@ public class PlayerCombat : MonoBehaviour, IDamageable
             if (Input.GetKeyDown(KeyCode.Q) && bubbleTimer <= 0) {
 
                 SetPlayerBubble();
-
                 bubbleTimer = timeBubbleCD;
-                PlayerMovement.player.FreezeMovement();
+
+                PlayerStatus.player.playerMovement.FreezeMovement();
             }
 
             if (bubbleTimer > 0) {
@@ -43,13 +41,13 @@ public class PlayerCombat : MonoBehaviour, IDamageable
             }
         }
         if (!isTimeBubbling) {
+
             if (Input.GetMouseButtonDown(0) && !isAttacking) {
-
-                //if (PlayerMovement.player.deltaY <= -PlayerMovement.player.minimumDeltaY || PlayerMovement.player.deltaY >= PlayerMovement.player.minimumDeltaY) {
-
-                //}
+                //if on the ground then stop moving to attack (if on the air then just stop moving if you hit something)
+                if (PlayerStatus.player.playerMovement.isTouchingGround) {
+                    PlayerStatus.player.playerMovement.FreezeMovement();
+                }
                 SetPlayerAttack();
-                PlayerMovement.player.FreezeMovement();
             }
 
         }
@@ -66,6 +64,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     private void SetPlayerAttack() {
         playerAnim.SetAttack(true);
+        PlayerStatus.player.playerMovement.StopDash();
         isAttacking = true;
     }
 
@@ -74,8 +73,14 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         isAttacking = false;
     }
 
+
+    public bool GetPlayerAttack() {
+        return isAttacking;
+    }
+
     public void SetPlayerBubble() {
         playerAnim.SetPlayerTimeBubble(true);
+        PlayerStatus.player.playerMovement.StopDash();
         isTimeBubbling = true;
     }
 
