@@ -39,7 +39,6 @@ public class TimeBubbleEffector : MonoBehaviour
                 }
                 collision.GetComponent<SpokyEnemy>().movementSpeed = normalTimeModiffier;
             }
-
         }
     }
     

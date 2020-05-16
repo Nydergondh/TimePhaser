@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 4823861446241378590}
   - component: {fileID: 9208431601635120296}
   - component: {fileID: 9208431601635120299}
+  - component: {fileID: 7750769589009624570}
   - component: {fileID: 9208431601635120298}
   m_Layer: 11
   m_Name: Player_Test
@@ -365,6 +366,22 @@ MonoBehaviour:
   damage: 50
   isAttacking: 0
   isTimeBubbling: 0
+--- !u!114 &7750769589009624570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9208431601635120300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85169e24adfbc7e46a04c135b250ab52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feetCollider: {fileID: 9208431600780781055}
+  thinPlataformLayer:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!114 &9208431601635120298
 MonoBehaviour:
   m_ObjectHideFlags: 0

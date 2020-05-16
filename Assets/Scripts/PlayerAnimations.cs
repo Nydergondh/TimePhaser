@@ -11,4 +11,10 @@ public class PlayerAnimations : HumanoidAnimations {
     public void SetPlayerDash(bool value) {
         objAnim.SetBool("Dash", value);
     }
+
+    public void SetDuck(bool value) {
+        //objAnim.SetBool("Duck", value);
+        print("Duck Seted");
+    }
+
 }

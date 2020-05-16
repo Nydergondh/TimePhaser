@@ -110,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
                 isTouchingGround = Physics2D.IsTouchingLayers(feetCollider, groundLayer);
                 //Jump if on Ground
                 if (Input.GetButtonDown("Jump") && isTouchingGround) {
+                    print("GotHere");
                     deltaY = jumpSpeed;
                     Jump();
                 }
@@ -134,6 +135,11 @@ public class PlayerMovement : MonoBehaviour
                 }
                 //if stoped dashing to attack
                 else if (deltaY == 0 && !isTouchingGround) {
+                    deltaY = rigidbody.velocity.y;
+                }
+                //if stoped dashing to attack
+                else if (deltaY == 0 && isTouchingGround && PlayerStatus.player.playerGround.isFalling) {
+                    print("GotHere1");
                     deltaY = rigidbody.velocity.y;
                 }
                 //on Ground and not Jumping
@@ -181,10 +187,6 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
 
-    }
-
-    public void Fall() {
-        isTouchingGround = false;
     }
 
     public void FreezeMovement() {

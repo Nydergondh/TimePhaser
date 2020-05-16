@@ -298,7 +298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 130814986}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CustomColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5710,7 +5710,7 @@ GameObject:
   - component: {fileID: 473195389}
   - component: {fileID: 473195391}
   - component: {fileID: 473195390}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ColliderPassThrough (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6678,7 +6678,7 @@ GameObject:
   - component: {fileID: 902577468}
   - component: {fileID: 902577470}
   - component: {fileID: 902577469}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ColliderPassThrough
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31679,6 +31679,11 @@ PrefabInstance:
         type: 3}
       propertyPath: minimumDeltaY
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208431601635120296, guid: 1abe2a508bb837e45a8225856a389f64,
+        type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 4352
       objectReference: {fileID: 0}
     - target: {fileID: 9208431601635120299, guid: 1abe2a508bb837e45a8225856a389f64,
         type: 3}

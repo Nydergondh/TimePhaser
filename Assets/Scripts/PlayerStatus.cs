@@ -8,6 +8,7 @@ public class PlayerStatus : MonoBehaviour
 
     public PlayerMovement playerMovement;
     public PlayerCombat playerCombat;
+    public PlayerGroundCollision playerGround;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class PlayerStatus : MonoBehaviour
     void Start() {
         playerCombat = GetComponent<PlayerCombat>();
         playerMovement = GetComponent<PlayerMovement>();
+        playerGround = GetComponent<PlayerGroundCollision>();
     }
 
 }
