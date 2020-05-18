@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: 6336216226530822463
     second: Character_Dash-Sheet_3
+  - first:
+      213: 638943480968977066
+    second: Character_Dash-Sheet_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -59,7 +62,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -182,6 +185,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Character_Dash-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 88
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaa15bee5bbfdd800800000000000000
+      internalID: 638943480968977066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -192,7 +216,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures:
-    - texture: {fileID: 2800000, guid: 7284ff890256d224d880779408626557, type: 3}
+    - texture: {fileID: 2800000, guid: 70817edd55adcf040a16e894642d087d, type: 3}
       name: _Emission
   spritePackingTag: 
   pSDRemoveMatte: 0
