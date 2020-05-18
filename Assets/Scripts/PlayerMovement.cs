@@ -33,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerAnimations playerAnim;
 
+    private ContactFilter2D colFilter;
+    private Collider2D[] results; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,17 +45,16 @@ public class PlayerMovement : MonoBehaviour
         _playerRenderer = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
 
+        results = new Collider2D[1];
+        colFilter = new ContactFilter2D();
+
+        colFilter.SetLayerMask(groundLayer);
     }
 
-    // Update is called once per frame
-    void Update() {
-        Movement(); //(TODO: add restriction when attacking)    
-    }
-
-    private void Movement() {
+    public void Movement() {
         Vector2 vel;
         //on ground
-        if (!_freezeMovement) {
+        if (!_freezeMovement && PlayerStatus.player.playerCombat.health > 0 && !PlayerStatus.player.playerCombat._isHurt) {
             #region Horizontal Movement
             //stop X movement Input if attacking
             if (!PlayerStatus.player.playerCombat.GetPlayerAttack()) {
@@ -62,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
                     deltaX = dashSpeed * transform.localScale.x;
                     rigidbody.gravityScale = 0;
                     _dashing = true;
+                    _jumping = false;
 
                 }
                 //dashing
@@ -75,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                 
                 }
+                //walking
                 else if (Input.GetButton("Horizontal") && deltaY == 0 && !_dashing) {
                     deltaX = Input.GetAxis("Horizontal") * runSpeed;
                 }
@@ -87,32 +91,30 @@ public class PlayerMovement : MonoBehaviour
                     deltaX = Input.GetAxis("Horizontal");
                 }
             }
-            //is dashing on the air and attacked
-            else if(deltaY == 0 && !isTouchingGround) {
-                //print("GotHere1");
-                //deltaY = rigidbody.velocity.y;
-                deltaX = airSpeed * transform.localScale.x;
-            }
             //if on the ground Stop X input
             else if(deltaY == 0 && isTouchingGround) {
                 //print("GotHere2");
                 deltaX = 0;
             }
-            //else mantain XSpeed momentum
-            else if(deltaY != 0) {
-                //print("GotHere3");
-                //deltaX = airSpeed * transform.localScale.x;
-            }
+            ////else mantain XSpeed momentum
+            //else if(deltaY != 0) {
+            //    print("GotHere3");
+            //    //deltaX = airSpeed * transform.localScale.x;
+            //}
             #endregion
             //if is not dashing then can jump
             if (!_dashing) {
                 #region Vertical Movement
-                isTouchingGround = Physics2D.IsTouchingLayers(feetCollider, groundLayer);
+                SetGrounded();
+
                 //Jump if on Ground
                 if (Input.GetButtonDown("Jump") && isTouchingGround) {
-                    print("GotHere");
                     deltaY = jumpSpeed;
                     Jump();
+                }
+                //if was on thin platform
+                else if (deltaY <= 0 && PlayerStatus.player.playerGround.isFalling) {
+                    deltaY = rigidbody.velocity.y;
                 }
                 //Is On Air
                 else if ((deltaY > 0 || deltaY < 0)) {
@@ -137,19 +139,9 @@ public class PlayerMovement : MonoBehaviour
                 else if (deltaY == 0 && !isTouchingGround) {
                     deltaY = rigidbody.velocity.y;
                 }
-                //if stoped dashing to attack
-                else if (deltaY == 0 && isTouchingGround && PlayerStatus.player.playerGround.isFalling) {
-                    print("GotHere1");
-                    deltaY = rigidbody.velocity.y;
-                }
                 //on Ground and not Jumping
                 else {
-                    if (isTouchingGround) {
-                        deltaY = 0;
-                    }
-                    else {
-                        deltaY = rigidbody.velocity.y;
-                    }
+                    deltaY = 0;
                 }
                 #endregion
             }
@@ -170,6 +162,16 @@ public class PlayerMovement : MonoBehaviour
             rigidbody.velocity = vel;
         }
 
+    }
+
+    private void SetGrounded() {
+        int i = Physics2D.OverlapCollider(feetCollider, colFilter, results);
+        if (i > 0) {
+            isTouchingGround = true;
+        }
+        else {
+            isTouchingGround = false;
+        }
     }
 
     private void Jump() {

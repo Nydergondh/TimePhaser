@@ -5,44 +5,48 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour, IDamageable
 {
-    private PlayerAnimations playerAnim;
+    private PlayerAnimations _playerAnim;
     public GameObject bubblePrefab;
     public Transform bubbleParent;
 
-    private float bubbleTimer = 0f;
+    private float _bubbleTimer = 0f;
     public float timeBubbleCD = 4f;
 
     public int damage = 50;
+    public int health = 50;
 
     [SerializeField]
-    private bool isAttacking = false;
+    private bool _isAttacking = false;
     [SerializeField]
-    private bool isTimeBubbling = false;
+    private bool _isTimeBubbling = false;
+    public bool _isHurt = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        playerAnim = GetComponent<PlayerAnimations>();
+        _playerAnim = GetComponent<PlayerAnimations>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!isAttacking) {
-            if (Input.GetKeyDown(KeyCode.Q) && bubbleTimer <= 0) {
+    public void TimeBubbling() {
+        if (!_isAttacking && !_isHurt && health > 0) {
+            if (Input.GetKeyDown(KeyCode.Q) && _bubbleTimer <= 0) {
 
                 SetPlayerBubble();
-                bubbleTimer = timeBubbleCD;
+                _bubbleTimer = timeBubbleCD;
 
                 PlayerStatus.player.playerMovement.FreezeMovement();
             }
 
-            if (bubbleTimer > 0) {
-                bubbleTimer -= Time.deltaTime;
+            if (_bubbleTimer > 0) {
+                _bubbleTimer -= Time.deltaTime;
             }
         }
-        if (!isTimeBubbling) {
+    }
 
-            if (Input.GetMouseButtonDown(0) && !isAttacking) {
+    public void Attack() {
+        if (!_isTimeBubbling && !_isHurt && health > 0) {
+
+            if (Input.GetMouseButtonDown(0) && !_isAttacking) {
                 //if on the ground then stop moving to attack (if on the air then just stop moving if you hit something)
                 if (PlayerStatus.player.playerMovement.isTouchingGround) {
                     PlayerStatus.player.playerMovement.FreezeMovement();
@@ -53,39 +57,101 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         }
     }
 
-
     public void InstaciateTimeBubble() {
         Instantiate(bubblePrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity, bubbleParent);
     }
 
     public void OnDamage(int damage) {
-        print("GOT HIT! (Player)");
+        //print("GOT HIT! Health " + (health-damage));
+        if (health > 0) {
+            health -= damage;      
+
+            if (_isAttacking || _isTimeBubbling) {
+                print("GOT HIT!");
+                UnsetPlayerAttack();
+                UnsetPlayerBubble();
+                PlayerStatus.player.playerMovement.UnfreezeMovement();
+            }
+            _isHurt = true;            
+           
+            _playerAnim.SetHit(true, health); //play the animation
+        }
     }
 
     private void SetPlayerAttack() {
-        playerAnim.SetAttack(true);
+        _playerAnim.SetAttack(true);
         PlayerStatus.player.playerMovement.StopDash();
-        isAttacking = true;
+        _isAttacking = true;
     }
 
     public void UnsetPlayerAttack() {
-        playerAnim.SetAttack(false);
-        isAttacking = false;
+        _playerAnim.SetAttack(false);
+        _isAttacking = false;
     }
 
 
     public bool GetPlayerAttack() {
-        return isAttacking;
+        return _isAttacking;
     }
 
     public void SetPlayerBubble() {
-        playerAnim.SetPlayerTimeBubble(true);
+
+        _playerAnim.SetPlayerTimeBubble(true);
+        _isTimeBubbling = true;
+
         PlayerStatus.player.playerMovement.StopDash();
-        isTimeBubbling = true;
     }
 
     public void UnsetPlayerBubble() {
-        playerAnim.SetPlayerTimeBubble(false);
-        isTimeBubbling = false;
+
+        _playerAnim.SetPlayerTimeBubble(false);
+        _isTimeBubbling = false;
+
     }
+
+
+    public void UnsetHurtAnim() {
+        _playerAnim.SetHit(false);
+        _isHurt = false;
+    }
+
+    public void SetHurtAnim() {
+        _playerAnim.SetHit(true);
+        _isHurt = true;
+    }
+
+    //public IEnumerator ChangeColor() {
+
+    //    int i = 0;
+    //    float aux = 0;
+
+    //    while (colorChangeTimer < colorChangeCD) {
+    //        colorChangeTimer += Time.deltaTime;
+    //        _spoky._renderer.material.SetFloat("_Hit", 1);
+
+    //        i++;
+    //        aux += Time.deltaTime;
+
+    //        if (colorChangeTimer >= colorChangeCD) {
+    //            colorChangeTimer = colorChangeCD;
+    //        }
+
+    //        yield return null;
+    //    }
+
+    //    while (colorChangeTimer > 0) {
+    //        colorChangeTimer -= Time.deltaTime;
+    //        _spoky._renderer.material.SetFloat("_Hit", colorChangeTimer);
+
+    //        i++;
+    //        aux += Time.deltaTime;
+
+    //        if (colorChangeTimer <= 0) {
+    //            colorChangeTimer = 0;
+    //        }
+
+    //        yield return null;
+    //    }
+    //    print(i + " " + aux);
+    //}
 }

@@ -31,8 +31,13 @@ public class PlayerGroundCollision : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+
+        FallPlataform();
+
+    }
+
+    public void FallPlataform() {
         if (Input.GetButton("Duck")) {
 
             if (feetCollider.OverlapCollider(colFilter, result) > 0) {
@@ -41,6 +46,9 @@ public class PlayerGroundCollision : MonoBehaviour
                 _plataformEffector = result[0].GetComponent<PlatformEffector2D>();
                 SetRotationPlataform(_plataformEffector, true);
                 isFalling = true;
+            }
+            else {
+                isFalling = false;
             }
 
         }
@@ -55,7 +63,7 @@ public class PlayerGroundCollision : MonoBehaviour
                 isFalling = false;
             }
         }
-        
+
         else if (Input.GetButton("Jump")) {
             if (_plataformEffector != null) {
                 SetRotationPlataform(_plataformEffector, false);
@@ -63,7 +71,6 @@ public class PlayerGroundCollision : MonoBehaviour
                 isFalling = false;
             }
         }
-
     }
 
     private void SetRotationPlataform(PlatformEffector2D effector, bool rotatePlat) {

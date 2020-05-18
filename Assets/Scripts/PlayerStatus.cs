@@ -24,4 +24,10 @@ public class PlayerStatus : MonoBehaviour
         playerGround = GetComponent<PlayerGroundCollision>();
     }
 
+    void Update() {
+        playerCombat.Attack();
+        playerCombat.TimeBubbling();
+        playerGround.FallPlataform();
+        playerMovement.Movement();
+    }
 }

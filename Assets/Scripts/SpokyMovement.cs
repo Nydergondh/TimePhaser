@@ -42,7 +42,7 @@ public class SpokyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_spoky.health > 0) {
+        if (_spoky.health > 0 && !_spoky.spokyCombat.isSpoked) {
             if (!_spoky.spokyVision.seeingPlayer && !_spoky.spokyCombat.inSpookRange) { // player is not in vision 
                 Wander();
             }
