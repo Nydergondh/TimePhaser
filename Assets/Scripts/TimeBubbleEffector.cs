@@ -9,7 +9,7 @@ public class TimeBubbleEffector : MonoBehaviour
     private Collider2D bubbleCollider;
     [Range(0.0F, 1.0F)]
     public float timeModifier = 0.25f;
-    private float normalTimeModiffier = 1;
+    private float normalTimeModiffier = 4;
 
     private Animator anim;
 
@@ -18,14 +18,27 @@ public class TimeBubbleEffector : MonoBehaviour
         
     }
 
-    private void OnTriggerStay2D(Collider2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision) {
         if (bubbleCollider.IsTouchingLayers(effectedLayers)) {
             //slow down animator
             if (collision.GetComponent<SpokyEnemy>()) {
                 if (collision.GetComponent<Animator>() != null) {
                     collision.GetComponent<Animator>().speed = timeModifier;
                 }
-                collision.GetComponent<SpokyEnemy>().movementSpeed = timeModifier;
+                collision.GetComponent<SpokyEnemy>().movementSpeed *= timeModifier;
+            }
+            else if (collision.GetComponent<SpokeyShooterEnemy>()) {
+                if (collision.GetComponent<Animator>() != null) {
+                    collision.GetComponent<Animator>().speed *= timeModifier;
+                }
+                print(collision.GetComponent<SpokeyShooterEnemy>().movementSpeed);
+                collision.GetComponent<SpokeyShooterEnemy>().movementSpeed *= timeModifier;
+                print(collision.GetComponent<SpokeyShooterEnemy>().movementSpeed);
+            }
+
+            else if (collision.GetComponent<Projectile>()) {
+                print("GotHere");
+                collision.GetComponent<Projectile>().movementSpeed *= timeModifier;
             }
         }
     }
@@ -35,9 +48,19 @@ public class TimeBubbleEffector : MonoBehaviour
             //speed up animator
             if (collision.GetComponent<SpokyEnemy>()) {
                 if (collision.GetComponent<Animator>() != null) {
-                    collision.GetComponent<Animator>().speed = normalTimeModiffier;
+                    collision.GetComponent<Animator>().speed = 1;
                 }
-                collision.GetComponent<SpokyEnemy>().movementSpeed = normalTimeModiffier;
+                collision.GetComponent<SpokyEnemy>().movementSpeed *= normalTimeModiffier;
+            }
+
+           else if (collision.GetComponent<SpokeyShooterEnemy>()) {
+                if (collision.GetComponent<Animator>() != null) {
+                    collision.GetComponent<Animator>().speed = 1;
+                }
+                collision.GetComponent<SpokeyShooterEnemy>().movementSpeed *= normalTimeModiffier;
+            }
+            else if (collision.GetComponent<Projectile>()) {
+                collision.GetComponent<Projectile>().movementSpeed *= normalTimeModiffier;
             }
         }
     }

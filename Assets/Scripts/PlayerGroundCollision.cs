@@ -41,6 +41,9 @@ public class PlayerGroundCollision : MonoBehaviour
         if (Input.GetButton("Duck")) {
 
             if (feetCollider.OverlapCollider(colFilter, result) > 0) {
+                if (_plataformEffector != null) {
+                    _plataformEffector.rotationalOffset = 0f;
+                }
                 feetCollider.OverlapCollider(colFilter, result);
                 _plataformCollider = result[0];
                 _plataformEffector = result[0].GetComponent<PlatformEffector2D>();
@@ -76,11 +79,9 @@ public class PlayerGroundCollision : MonoBehaviour
     private void SetRotationPlataform(PlatformEffector2D effector, bool rotatePlat) {
         if (rotatePlat) {
             effector.rotationalOffset = 180f;
-            //print("GotHere : " + PlayerStatus.player.playerMovement.deltaY);
         }
         else { 
             effector.rotationalOffset = 0f;
-            //print("GotHere1 : " + PlayerStatus.player.playerMovement.deltaY);
         }
         
     }
