@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy Shader1
+  m_Name: SkellyBoss
   m_Shader: {fileID: -6465566751694194690, guid: f45023eb682efe84e8633259282617a2,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
@@ -21,15 +21,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Emission:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 6e2f437bf083d3e49a371ea40e3220ca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 6dc635e7d5c057543bf7ee4782a2b551, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Hit: 0
     m_Colors:
-    - Color_9785C321: {r: 0, g: 1.2108425, b: 1.9766746, a: 0}
+    - Color_9785C321: {r: 0, g: 0.79885817, b: 1.3041189, a: 0}
     - _HitColor: {r: 2, g: 0.04917064, b: 0, a: 0}
