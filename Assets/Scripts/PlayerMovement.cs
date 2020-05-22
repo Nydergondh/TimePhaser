@@ -207,8 +207,11 @@ public class PlayerMovement : MonoBehaviour
     public void StopDash() {
         _dashing = false;
         _jumping = false;
+        playerAnim.SetJump(false);
+
         deltaY = 0;
         rigidbody.gravityScale = 1f;
+
         playerAnim.SetPlayerDash(false);
         _dashTimer = 0;
     }

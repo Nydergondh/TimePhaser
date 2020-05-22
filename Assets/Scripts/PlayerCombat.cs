@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerCombat : MonoBehaviour, IDamageable
 {
@@ -9,10 +10,13 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     public GameObject bubblePrefab;
     public Transform bubbleParent;
 
+    public GameObject textDamage;
+
     private float _bubbleTimer = 0f;
     public float timeBubbleCD = 4f;
 
     public int damage = 50;
+    public int energy = 50;
     public int health = 50;
 
     [SerializeField]
@@ -20,6 +24,9 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     [SerializeField]
     private bool _isTimeBubbling = false;
     public bool _isHurt = false;
+
+    public delegate void TakeDamage(int damage);
+    public TakeDamage takeDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +52,6 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     public void Attack() {
         if (!_isTimeBubbling && !_isHurt && health > 0) {
-
             if (Input.GetMouseButtonDown(0) && !_isAttacking) {
                 //if on the ground then stop moving to attack (if on the air then just stop moving if you hit something)
                 if (PlayerStatus.player.playerMovement.isTouchingGround) {
@@ -53,7 +59,6 @@ public class PlayerCombat : MonoBehaviour, IDamageable
                 }
                 SetPlayerAttack();
             }
-
         }
     }
 
@@ -62,12 +67,13 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     }
 
     public void OnDamage(int damage) {
-        //print("GOT HIT! Health " + (health-damage));
+
+        GameObject damagePopUp;
+        
         if (health > 0) {
             health -= damage;      
 
             if (_isAttacking || _isTimeBubbling) {
-                print("GOT HIT!");
                 UnsetPlayerAttack();
                 UnsetPlayerBubble();
                 PlayerStatus.player.playerMovement.UnfreezeMovement();
@@ -76,12 +82,19 @@ public class PlayerCombat : MonoBehaviour, IDamageable
            
             _playerAnim.SetHit(true, health); //play the animation
         }
+
+        damagePopUp = Instantiate(textDamage, PlayerStatus.player.damageUISpawnPoint.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
+        damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
+
+        takeDamage?.Invoke(damage);
     }
 
     private void SetPlayerAttack() {
+
         _playerAnim.SetAttack(true);
-        PlayerStatus.player.playerMovement.StopDash();
         _isAttacking = true;
+
+        PlayerStatus.player.playerMovement.StopDash();
     }
 
     public void UnsetPlayerAttack() {
@@ -103,10 +116,8 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     }
 
     public void UnsetPlayerBubble() {
-
         _playerAnim.SetPlayerTimeBubble(false);
         _isTimeBubbling = false;
-
     }
 
 

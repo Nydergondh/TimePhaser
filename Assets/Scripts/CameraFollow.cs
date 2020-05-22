@@ -10,19 +10,19 @@ public class CameraFollow : MonoBehaviour
 
 
     private Vector2 lerpPosition;
-    private Vector2 desiredPostion;
+    private Vector3 desiredPostion;
 
 
     public float smoothSpeed = 5f;
     // Update is called once per frame
 
     void Start() {
-        desiredPostion = new Vector2(player.position.x, player.position.y + OffsetY);
+        desiredPostion = new Vector3(player.position.x, player.position.y + OffsetY, transform.position.z);
         transform.position = desiredPostion;
     }
     void Update()
     {
-        desiredPostion = new Vector2(player.position.x, player.position.y);
+        desiredPostion = new Vector3(player.position.x, player.position.y + OffsetY, transform.position.z);
         transform.position = desiredPostion;
 
         //desiredPostion = new Vector2(player.position.x, player.position.y + OffsetY);

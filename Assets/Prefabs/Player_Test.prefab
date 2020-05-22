@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1430015046}
   - component: {fileID: 1430015047}
   - component: {fileID: 1787744240}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Player_Attack_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,6 +73,39 @@ MonoBehaviour:
   spokyLayer:
     serializedVersion: 2
     m_Bits: 1024
+  particlePrefab: {fileID: 4810251385720736067, guid: c6bf234cbde5ec24fa605fad0085e6cf,
+    type: 3}
+  particleParent: {fileID: 0}
+--- !u!1 &6919341435365144472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2603991676007793375}
+  m_Layer: 11
+  m_Name: UiDamagePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2603991676007793375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6919341435365144472}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9208431601635120301}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9208431600620371643
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9208431600780781054}
   - component: {fileID: 9208431600780781055}
+  - component: {fileID: 1861283234}
   m_Layer: 11
   m_Name: Player_Feet_Collider
   m_TagString: Untagged
@@ -199,7 +233,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.004267931, y: -0.08545804}
+  m_Offset: {x: 0.004267931, y: -0.0763042}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -210,8 +244,29 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.19758248, y: 0.10520601}
+  m_Size: {x: 0.19758248, y: 0.08689833}
   m_EdgeRadius: 0
+--- !u!50 &1861283234
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9208431600780781025}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &9208431601635120300
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +305,7 @@ Transform:
   - {fileID: 9208431600620371640}
   - {fileID: 9208431600780781054}
   - {fileID: 1430015046}
+  - {fileID: 2603991676007793375}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -323,6 +379,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 0}
   playerCombat: {fileID: 0}
+  playerGround: {fileID: 0}
+  damageUISpawnPoint: {fileID: 2603991676007793375}
 --- !u!114 &9208431601635120296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,12 +398,12 @@ MonoBehaviour:
   jumpSpeed: 5
   airSpeed: 3
   deltaX: 0
-  minimumDeltaY: 0.1
+  minimumDeltaY: 0.01
   deltaY: 0
   isTouchingGround: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
   feetCollider: {fileID: 9208431600780781055}
 --- !u!114 &9208431601635120299
 MonoBehaviour:
@@ -362,10 +420,15 @@ MonoBehaviour:
   bubblePrefab: {fileID: 8981269579670362078, guid: f24e24cd481a62849a2ada5585e33c08,
     type: 3}
   bubbleParent: {fileID: 0}
+  textDamage: {fileID: 2157174206813584903, guid: c86d4f814be416849803cbf162e84091,
+    type: 3}
   timeBubbleCD: 4
   damage: 50
-  isAttacking: 0
-  isTimeBubbling: 0
+  energy: 50
+  health: 300
+  _isAttacking: 0
+  _isTimeBubbling: 0
+  _isHurt: 0
 --- !u!114 &7750769589009624570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,6 +445,7 @@ MonoBehaviour:
   thinPlataformLayer:
     serializedVersion: 2
     m_Bits: 4096
+  isFalling: 0
 --- !u!114 &9208431601635120298
 MonoBehaviour:
   m_ObjectHideFlags: 0

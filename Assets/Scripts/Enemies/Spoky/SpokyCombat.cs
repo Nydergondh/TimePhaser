@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SpokyCombat : MonoBehaviour, IDamageable
 {
@@ -27,6 +28,7 @@ public class SpokyCombat : MonoBehaviour, IDamageable
     public float colorChangeTimer = 0;
     public float colorChangeCD = 0.5f;
 
+    public GameObject textDamage;
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +80,8 @@ public class SpokyCombat : MonoBehaviour, IDamageable
     }
 
     public void OnDamage(int damage) {
+        GameObject damagePopUp;
+
         if (_spoky.health > 0) {
             _spoky.health -= damage;
             if (_spoky.health > 0) {
@@ -91,7 +95,10 @@ public class SpokyCombat : MonoBehaviour, IDamageable
             else {
                 Destroy(gameObject,3f);
             }
-            _spokyAnim.SetHit(true, _spoky.health); //play the animation]
+            damagePopUp = Instantiate(textDamage, _spoky.spookyEyes.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
+            damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
+
+            _spokyAnim.SetHit(true, _spoky.health);
         }
     }
 

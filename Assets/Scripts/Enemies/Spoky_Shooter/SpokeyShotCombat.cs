@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class SpokeyShotCombat : MonoBehaviour
+public class SpokeyShotCombat : MonoBehaviour, IDamageable
 {
     public bool inSpookRange = false; //is in range to attack
     public bool isSpooking = false; // is attacking
@@ -24,6 +25,7 @@ public class SpokeyShotCombat : MonoBehaviour
     public LayerMask playerLayer;
 
     public GameObject projectilePrefab;
+    public GameObject textDamage;
 
     public float colorChangeTimer = 0;
     public float colorChangeCD = 0.5f;
@@ -76,6 +78,8 @@ public class SpokeyShotCombat : MonoBehaviour
     }
 
     public void OnDamage(int damage) {
+        GameObject damagePopUp;
+
         if (_spokey.health > 0) {
             _spokey.health -= damage;
             if (_spokey.health > 0) {
@@ -89,7 +93,10 @@ public class SpokeyShotCombat : MonoBehaviour
             else {
                 Destroy(gameObject, 3f);
             }
-            _spokyAnim.SetHit(true, _spokey.health); //play the animation]
+            _spokyAnim.SetHit(true, _spokey.health);
+
+            damagePopUp = Instantiate(textDamage, _spokey.spookyEyes.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
+            damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
         }
     }
 
@@ -113,7 +120,7 @@ public class SpokeyShotCombat : MonoBehaviour
     public void CreateProjectile() {
 
         GameObject projectile;
-        projectile = Instantiate(projectilePrefab, _spokey.bulletSpawnPoint.position, Quaternion.identity, GameManager.gameManager.instaciatedFather);
+        projectile = Instantiate(projectilePrefab, _spokey.bulletSpawnPoint.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
 
         if (transform.localScale.x < 0) {
             projectile.GetComponent<Projectile>().movementSpeed *= -1;

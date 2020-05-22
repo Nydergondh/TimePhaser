@@ -15,7 +15,6 @@ public class TimeBubbleEffector : MonoBehaviour
 
     private void Start() {
         bubbleCollider = GetComponent<Collider2D>();
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -37,7 +36,6 @@ public class TimeBubbleEffector : MonoBehaviour
             }
 
             else if (collision.GetComponent<Projectile>()) {
-                print("GotHere");
                 collision.GetComponent<Projectile>().movementSpeed *= timeModifier;
             }
         }

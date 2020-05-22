@@ -10,15 +10,15 @@ public class PlayerStatus : MonoBehaviour
     public PlayerCombat playerCombat;
     public PlayerGroundCollision playerGround;
 
+    public Transform damageUISpawnPoint;
+
     void Awake()
     {
         if (player != null) {
             player = null;
         }
         player = this;
-    }
 
-    void Start() {
         playerCombat = GetComponent<PlayerCombat>();
         playerMovement = GetComponent<PlayerMovement>();
         playerGround = GetComponent<PlayerGroundCollision>();

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
     public LayerMask playerLayer;
+    public LayerMask groundLayer;
+
     public GameObject hitPrefab;
-    public Transform particleParent;
 
     private SpriteRenderer _spriteRenderer;
     private Collider2D _bulletCollider;
@@ -23,6 +24,7 @@ public class Projectile : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        
         if (playerLayer == (playerLayer | 1 << collision.gameObject.layer)) {
             if (collision.GetComponent<IDamageable>() != null) {
                 collision.GetComponent<IDamageable>().OnDamage(damage);
@@ -33,11 +35,15 @@ public class Projectile : MonoBehaviour {
             UnsetBulletParameters();
             Destroy(this, 1f);
         }
+        if (groundLayer == (groundLayer | 1 << collision.gameObject.layer)) {
+            SpawnParticles(collision);
+            Destroy(gameObject);
+        }
     }
 
     private void SpawnParticles(Collider2D collision) {
         GameObject hitParticleObj;
-        hitParticleObj = Instantiate(hitPrefab, collision.bounds.center, Quaternion.identity, particleParent);
+        hitParticleObj = Instantiate(hitPrefab, collision.bounds.center, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
         hitParticleObj.GetComponentInChildren<ParticleSystem>().Play();
 
         Destroy(hitParticleObj, 2f);

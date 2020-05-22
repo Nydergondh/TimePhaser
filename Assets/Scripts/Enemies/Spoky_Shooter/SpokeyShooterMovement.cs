@@ -14,8 +14,6 @@ public class SpokeyShooterMovement : MonoBehaviour
     private float wanderTimer = 2f;
     private float timeToWait = 3f;
 
-    private Animator _animator;
-
     private Collider2D _collider;
 
     public float wanderRange = 2.5f;
@@ -82,10 +80,10 @@ public class SpokeyShooterMovement : MonoBehaviour
 
         transform.position = velocity;
 
-        if (transform.position.x >= target.x) {
+        if (transform.position.x <= target.x) {
             _enemyAnim.SetVelocity(new Vector2(_spokey.movementSpeed, transform.position.y));
         }
-        else if (transform.position.x < target.x) {
+        else if (transform.position.x > target.x) {
             _enemyAnim.SetVelocity(new Vector2(-_spokey.movementSpeed, transform.position.y));
         }
 
