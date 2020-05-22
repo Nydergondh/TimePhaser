@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SkellyBoss
-  m_Shader: {fileID: -6465566751694194690, guid: f45023eb682efe84e8633259282617a2,
+  m_Name: Green Health Light
+  m_Shader: {fileID: -6465566751694194690, guid: 51abfd20823338f43b41a80836a875c0,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
@@ -20,16 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Emission:
-        m_Texture: {fileID: 2800000, guid: 6e2f437bf083d3e49a371ea40e3220ca, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 7a61660a98e675e4f8dc0ffb4777099c, type: 3}
+        m_Texture: {fileID: 2800000, guid: e721b6fe68285ce47b0f3586167d9fd4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _Hit: 0
+    m_Floats: []
     m_Colors:
-    - Color_9785C321: {r: 0, g: 0.5315545, b: 0.8603976, a: 0}
-    - _HitColor: {r: 2, g: 0.04917064, b: 0, a: 0}
+    - _Color: {r: 1.081128, g: 1.7207954, b: 0.180188, a: 0}
