@@ -26,4 +26,4 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - _Shine: {r: 0.19607843, g: 0.5647059, b: 1, a: 0}
+    - _Shine: {r: 0.05630875, g: 0.1621692, b: 0.2871746, a: 0}
