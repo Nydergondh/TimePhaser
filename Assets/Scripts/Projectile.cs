@@ -33,11 +33,11 @@ public class Projectile : MonoBehaviour {
             SpawnParticles(collision);
 
             UnsetBulletParameters();
-            Destroy(this, 1f);
+            Destroy(gameObject, 1f);
         }
         if (groundLayer == (groundLayer | 1 << collision.gameObject.layer)) {
             SpawnParticles(collision);
-            Destroy(gameObject);
+            Destroy(gameObject, 1f);
         }
     }
 

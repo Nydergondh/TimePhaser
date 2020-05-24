@@ -49,6 +49,7 @@ public class SpokyMovement : MonoBehaviour
             else { 
                 if (!_spoky.spokyCombat.inSpookRange && !_spoky.spokyCombat.isSpooking) { // player is in vision
                     Movement(PlayerStatus.player.transform.position);
+                    ChangeDirection(PlayerStatus.player.transform.position);
                 }
                 else { //is attacking player
                     _enemyAnim.SetVelocity(Vector2.zero);
@@ -62,7 +63,6 @@ public class SpokyMovement : MonoBehaviour
 
             if (Vector2.Distance(transform.position, _wanderPos) >= _minimumTargetDistance) {
                 Movement(_wanderPos);
-                ChangeDirection();
             }
             else {
                 wanderTimer = timeToWait;
@@ -75,6 +75,10 @@ public class SpokyMovement : MonoBehaviour
         else {
             wanderTimer -= Time.deltaTime;
             _enemyAnim.SetVelocity(Vector2.zero);
+
+            if(wanderTimer <= 0) {
+                ChangeDirection(_wanderPos);
+            }
         }
     }
 
@@ -126,7 +130,6 @@ public class SpokyMovement : MonoBehaviour
 
         #region CHOOSING ONE OF THE TWO POINTS
 
-
         //if went rigth last time go left
         if (GetTransformOldDirection() == 1) {
             _oldWanderPos = _wanderPos;
@@ -165,9 +168,9 @@ public class SpokyMovement : MonoBehaviour
 
 
 
-    private void ChangeDirection() {
+    private void ChangeDirection(Vector2 target) {
 
-        if(_wanderPos.x < transform.position.x) {
+        if(target.x < transform.position.x) {
             transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
         }
         else {
@@ -178,7 +181,7 @@ public class SpokyMovement : MonoBehaviour
 
     public void PersuitPlayer(bool value) {
         if (value) {
-            _spoky.spokyVision.seeingPlayer = true;
+            _spoky.spokyVision.seeingPlayer = true;            
             wanderTimer = timeToWait;
         }
         else {

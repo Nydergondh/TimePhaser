@@ -45,6 +45,7 @@ public class SpokeyShooterMovement : MonoBehaviour
             else {
                 if (_spokey.spokeyCombat.inSpookRange || _spokey.spokeyCombat.isSpooking) { // player is in vision
                     _enemyAnim.SetVelocity(Vector2.zero);
+                    ChangeDirection(PlayerStatus.player.transform.position); //TODO: if enough time is left check for more efficient call
                 }
             }
         }
@@ -55,7 +56,7 @@ public class SpokeyShooterMovement : MonoBehaviour
 
             if (Vector2.Distance(transform.position, _wanderPos) >= _minimumTargetDistance && !GoingToTheAbyss()) {
                 Movement(_wanderPos);
-                ChangeDirection();
+                ChangeDirection(_wanderPos); //TODO: if enough time is left check for more efficient call
             }
             else {
                 wanderTimer = timeToWait;
@@ -169,15 +170,15 @@ public class SpokeyShooterMovement : MonoBehaviour
     private bool GoingToTheAbyss() {
         RaycastHit2D abyss;
 
-        if (abyss = Physics2D.Raycast(_spokey.bulletSpawnPoint.position, Vector2.down, 2f , groundLayer)) {
+        if (abyss = Physics2D.Raycast(_spokey.bulletSpawnPoint.position, Vector2.down, 0.3f , groundLayer)) {
             return false;
         }
         return true;
     }
 
-    private void ChangeDirection() {
+    private void ChangeDirection(Vector2 target) {
 
-        if (_wanderPos.x < transform.position.x) {
+        if (target.x < transform.position.x) {
             transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
         }
         else {
@@ -186,13 +187,17 @@ public class SpokeyShooterMovement : MonoBehaviour
 
     }
 
-    public void PersuitPlayer(bool value) {
-        if (value) {
-            _spokey.spokeyVision.seeingPlayer = true;
-            wanderTimer = timeToWait;
+    private void OnDrawGizmosSelected() {
+        try {
+            Gizmos.color = Color.green;
+
+            Vector3 pointA = _spokey.bulletSpawnPoint.position;
+            Vector3 pointB = new Vector3(_spokey.bulletSpawnPoint.position.x, _spokey.bulletSpawnPoint.position.y - 0.3f, _spokey.bulletSpawnPoint.position.z);
+
+            Gizmos.DrawLine(pointA, pointB);
         }
-        else {
-            _spokey.spokeyVision.seeingPlayer = false;
+        catch {
+
         }
     }
 

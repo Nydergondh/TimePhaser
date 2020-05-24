@@ -55,6 +55,7 @@ public class PlayerGroundCollision : MonoBehaviour
             }
 
         }
+
         else if (isFalling) {
             if (feetCollider.OverlapCollider(colFilter, result) > 0) {
                 _plataformCollider = result[0];
