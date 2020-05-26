@@ -80,6 +80,8 @@ public class SpokyCombat : MonoBehaviour, IDamageable
     }
 
     public void OnDamage(int damage) {
+
+        float rand;
         GameObject damagePopUp;
 
         if (_spoky.health > 0) {
@@ -95,11 +97,16 @@ public class SpokyCombat : MonoBehaviour, IDamageable
             else {
                 Destroy(gameObject,3f);
             }
+
+            rand = Random.Range(0.8f, 1.2f);
+            damage = (int)(rand * damage);
+
             damagePopUp = Instantiate(textDamage, _spoky.spookyEyes.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
             damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
 
             _spokyAnim.SetHit(true, _spoky.health);
         }
+
     }
 
 

@@ -20,19 +20,6 @@ public class DamageUI : MonoBehaviour
     void Start()
     {
         _text = GetComponent<TextMeshPro>();
-
-        int value;
-        float aux;
-        float rand;
-
-        rand = Random.Range(0.8f,1.2f);
-
-        float.TryParse(_text.text, out aux);
-
-        aux *= rand;
-        value = (int)aux;
-
-        _text.text = value.ToString();
         _textColor = _text.color;
     }
 

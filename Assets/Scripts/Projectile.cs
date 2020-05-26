@@ -31,19 +31,18 @@ public class Projectile : MonoBehaviour {
             }
 
             SpawnParticles(collision);
-
-            UnsetBulletParameters();
-            Destroy(gameObject, 1f);
+            //UnsetBulletParameters();
+            Destroy(gameObject);
         }
-        if (groundLayer == (groundLayer | 1 << collision.gameObject.layer)) {
+        else if (groundLayer == (groundLayer | 1 << collision.gameObject.layer)) {
             SpawnParticles(collision);
-            Destroy(gameObject, 1f);
+            Destroy(gameObject);
         }
     }
 
     private void SpawnParticles(Collider2D collision) {
         GameObject hitParticleObj;
-        hitParticleObj = Instantiate(hitPrefab, collision.bounds.center, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
+        hitParticleObj = Instantiate(hitPrefab, collision.ClosestPoint(transform.position), Quaternion.identity, InstaciatedObjects.fatherReference.transform);
         hitParticleObj.GetComponentInChildren<ParticleSystem>().Play();
 
         Destroy(hitParticleObj, 2f);

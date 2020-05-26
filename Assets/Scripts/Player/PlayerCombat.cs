@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -61,7 +60,11 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     public void OnDamage(int damage) {
 
+        float rand;
         GameObject damagePopUp;
+
+        rand = Random.Range(0.8f, 1.2f);
+        damage = (int)(rand * damage);
         
         if (PlayerStatus.player.health > 0) {
             PlayerStatus.player.health -= damage;      
@@ -75,6 +78,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
            
             _playerAnim.SetHit(true, PlayerStatus.player.health); //play the animation
         }
+
 
         damagePopUp = Instantiate(textDamage, PlayerStatus.player.damageUISpawnPoint.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
         damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();

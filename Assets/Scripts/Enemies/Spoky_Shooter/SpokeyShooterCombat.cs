@@ -65,6 +65,7 @@ public class SpokeyShooterCombat : MonoBehaviour, IDamageable
 
     public void OnDamage(int damage) {
         GameObject damagePopUp;
+        float rand;
 
         if (_spokey.health > 0) {
             _spokey.health -= damage;
@@ -82,6 +83,11 @@ public class SpokeyShooterCombat : MonoBehaviour, IDamageable
             _spokyAnim.SetHit(true, _spokey.health);
 
             damagePopUp = Instantiate(textDamage, _spokey.spookyEyes.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
+
+    
+            rand = Random.Range(0.8f, 1.2f);
+            damage = (int)(rand * damage);
+
             damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
         }
     }
@@ -110,6 +116,8 @@ public class SpokeyShooterCombat : MonoBehaviour, IDamageable
 
         if (transform.localScale.x < 0) {
             projectile.GetComponent<Projectile>().movementSpeed *= -1;
+            projectile.transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+            print("GotHere");
         }
 
     }
