@@ -13,7 +13,7 @@ public class PlayerDamage : MonoBehaviour
 
             if (collision.GetComponent<IDamageable>() != null) {
 
-                collision.GetComponent<IDamageable>().OnDamage(PlayerStatus.player.playerCombat.damage);
+                collision.GetComponent<IDamageable>().OnDamage(PlayerStatus.player.damage);
 
                 if (PlayerStatus.player.playerMovement.deltaY != 0) {
                     StartCoroutine(PlayerStatus.player.playerMovement.MiniFreezePlayer());

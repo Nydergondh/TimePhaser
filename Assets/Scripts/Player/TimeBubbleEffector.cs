@@ -15,6 +15,8 @@ public class TimeBubbleEffector : MonoBehaviour
 
     private void Start() {
         bubbleCollider = GetComponent<Collider2D>();
+
+        PlayerStatus.player.WithdrawEnergy(25);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -32,7 +34,6 @@ public class TimeBubbleEffector : MonoBehaviour
                 }
                 print(collision.GetComponent<SpokeyShooterEnemy>().movementSpeed);
                 collision.GetComponent<SpokeyShooterEnemy>().movementSpeed *= timeModifier;
-                print(collision.GetComponent<SpokeyShooterEnemy>().movementSpeed);
             }
 
             else if (collision.GetComponent<Projectile>()) {

@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     public void Movement() {
         Vector2 vel;
         //on ground
-        if (!_freezeMovement && PlayerStatus.player.playerCombat.health > 0 && !PlayerStatus.player.playerCombat._isHurt) {
+        if (!_freezeMovement && PlayerStatus.player.health > 0 && !PlayerStatus.player.playerCombat._isHurt) {
             #region Horizontal Movement
             //stop X movement Input if attacking
             if (!PlayerStatus.player.playerCombat.GetPlayerAttack()) {

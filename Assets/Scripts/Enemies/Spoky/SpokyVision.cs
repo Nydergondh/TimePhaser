@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SpokyVision : MonoBehaviour
 {
-    public float visionMaxRange = 2f;  // PointA.x = transform.position.x + visionMimRange
-    public float visionMimRange = 0.5f;// PointB.x = transform.position.x + visionMaxRange
+    public float visionRange = 3f;
 
     public float areaSizeY = 0.5f;// PointA.y = transform.position.y + (areaSizeY/2)
                                   // PointB.y = transform.position.y - (areaSizeY/2)
@@ -20,21 +19,20 @@ public class SpokyVision : MonoBehaviour
     public LayerMask layer;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         _spoky = GetComponent<SpokyEnemy>();
 
-        _pointA = new Vector2(_spoky.spookyEyes.position.x + visionMimRange, _spoky.spookyEyes.position.y - (areaSizeY / 2));
-        _pointB = new Vector2(_spoky.spookyEyes.position.x + visionMaxRange, _spoky.spookyEyes.position.y + (areaSizeY / 2));
+        _pointA = new Vector2(_spoky.spookyEyes.position.x - (visionRange/2), _spoky.spookyEyes.position.y - (areaSizeY / 2));
+        _pointB = new Vector2(_spoky.spookyEyes.position.x + (visionRange/2), _spoky.spookyEyes.position.y + (areaSizeY / 2));
     }
 
     // Update is called once per frame
     void Update() {
         if (_spoky.health > 0) {
-            _pointA = new Vector2(_spoky.spookyEyes.position.x + visionMimRange, _spoky.spookyEyes.position.y - (areaSizeY / 2));
-            _pointB = new Vector2(_spoky.spookyEyes.position.x + visionMaxRange, _spoky.spookyEyes.position.y + (areaSizeY / 2));
+            _pointA = new Vector2(_spoky.spookyEyes.position.x - (visionRange / 2), _spoky.spookyEyes.position.y - (areaSizeY / 2));
+            _pointB = new Vector2(_spoky.spookyEyes.position.x + (visionRange / 2), _spoky.spookyEyes.position.y + (areaSizeY / 2));
 
-            FlipPoints();
+            //FlipPoints();
 
             PersuitPlayer();
         }
@@ -48,7 +46,7 @@ public class SpokyVision : MonoBehaviour
             _spoky.spokyMovement.PersuitPlayer(false);
         }
     }
-
+    /*
     private void FlipPoints() {
         if (transform.localScale.x == -1 && visionMaxRange == Mathf.Abs(visionMaxRange)) {
             visionMaxRange *= -1;
@@ -59,7 +57,7 @@ public class SpokyVision : MonoBehaviour
             visionMimRange = Mathf.Abs(visionMimRange);
         }
     }
-
+    */
     private void OnDrawGizmosSelected() {
         try {
             Gizmos.color = Color.green;
@@ -85,7 +83,7 @@ public class SpokyVision : MonoBehaviour
             Gizmos.DrawLine(pointA, pointB);
         }
         catch {
-            
+
         }
     }
 }

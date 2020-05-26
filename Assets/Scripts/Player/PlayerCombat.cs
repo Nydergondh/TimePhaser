@@ -15,18 +15,11 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     private float _bubbleTimer = 0f;
     public float timeBubbleCD = 4f;
 
-    public int damage = 50;
-    public int energy = 50;
-    public int health = 50;
-
     [SerializeField]
     private bool _isAttacking = false;
     [SerializeField]
     private bool _isTimeBubbling = false;
     public bool _isHurt = false;
-
-    public delegate void TakeDamage(int damage);
-    public TakeDamage takeDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +28,8 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     }
 
     public void TimeBubbling() {
-        if (!_isAttacking && !_isHurt && health > 0) {
-            if (Input.GetKeyDown(KeyCode.Q) && _bubbleTimer <= 0) {
+        if (!_isAttacking && !_isHurt && PlayerStatus.player.health > 0) {
+            if (Input.GetKeyDown(KeyCode.Q) && _bubbleTimer <= 0 && PlayerStatus.player.energy > 0) {
 
                 SetPlayerBubble();
                 _bubbleTimer = timeBubbleCD;
@@ -51,7 +44,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     }
 
     public void Attack() {
-        if (!_isTimeBubbling && !_isHurt && health > 0) {
+        if (!_isTimeBubbling && !_isHurt && PlayerStatus.player.health > 0) {
             if (Input.GetMouseButtonDown(0) && !_isAttacking) {
                 //if on the ground then stop moving to attack (if on the air then just stop moving if you hit something)
                 if (PlayerStatus.player.playerMovement.isTouchingGround) {
@@ -70,8 +63,8 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
         GameObject damagePopUp;
         
-        if (health > 0) {
-            health -= damage;      
+        if (PlayerStatus.player.health > 0) {
+            PlayerStatus.player.health -= damage;      
 
             if (_isAttacking || _isTimeBubbling) {
                 UnsetPlayerAttack();
@@ -80,13 +73,13 @@ public class PlayerCombat : MonoBehaviour, IDamageable
             }
             _isHurt = true;            
            
-            _playerAnim.SetHit(true, health); //play the animation
+            _playerAnim.SetHit(true, PlayerStatus.player.health); //play the animation
         }
 
         damagePopUp = Instantiate(textDamage, PlayerStatus.player.damageUISpawnPoint.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
         damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
 
-        takeDamage?.Invoke(damage);
+        PlayerStatus.player.attUI?.Invoke(PlayerStatus.player.health, UISliderController.SliderType.Health);
     }
 
     private void SetPlayerAttack() {

@@ -11,7 +11,7 @@ public class SpokeyShooterEnemy : MonoBehaviour {
 
     public SpokeyShooterVision spokeyVision;
     public SpokeyShooterMovement spokeyMovement;
-    public SpokeyShotCombat spokeyCombat;
+    public SpokeyShooterCombat spokeyCombat;
 
     public Transform spookyEyes;
     public Transform bulletSpawnPoint;
@@ -21,7 +21,7 @@ public class SpokeyShooterEnemy : MonoBehaviour {
     private void Start() {
         spokeyVision = GetComponent<SpokeyShooterVision>();
         spokeyMovement = GetComponent<SpokeyShooterMovement>();
-        spokeyCombat = GetComponent<SpokeyShotCombat>();
+        spokeyCombat = GetComponent<SpokeyShooterCombat>();
     }
 
 }

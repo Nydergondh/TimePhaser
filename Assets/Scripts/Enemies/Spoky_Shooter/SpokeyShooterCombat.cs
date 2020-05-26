@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SpokeyShotCombat : MonoBehaviour, IDamageable
+public class SpokeyShooterCombat : MonoBehaviour, IDamageable
 {
     public bool inSpookRange = false; //is in range to attack
     public bool isSpooking = false; // is attacking
@@ -11,8 +11,7 @@ public class SpokeyShotCombat : MonoBehaviour, IDamageable
 
     private HumanoidAnimations _spokyAnim;
 
-    public float attackMaxRange = 0.75f;  // PointA.x = transform.position.x + visionMimRange
-    public float attackMimRange = 0.25f;// PointB.x = transform.position.x + visionMaxRange
+    public float attackRange = 4f;
 
     public float areaSizeY = -0.5f;// PointA.y = transform.position.y + (areaSizeY/2)
                                    // PointB.y = transform.position.y - (areaSizeY/2)
@@ -34,8 +33,8 @@ public class SpokeyShotCombat : MonoBehaviour, IDamageable
     void Start() {
         _spokey = GetComponent<SpokeyShooterEnemy>();
 
-        _pointA = new Vector2(_spokey.spookyEyes.position.x + attackMimRange, _spokey.spookyEyes.position.y - (areaSizeY / 2));
-        _pointB = new Vector2(_spokey.spookyEyes.position.x + attackMaxRange, _spokey.spookyEyes.position.y + (areaSizeY / 2));
+        _pointA = new Vector2(_spokey.spookyEyes.position.x - (attackRange / 2), _spokey.spookyEyes.position.y - (areaSizeY / 2));
+        _pointB = new Vector2(_spokey.spookyEyes.position.x + (attackRange / 2), _spokey.spookyEyes.position.y + (areaSizeY / 2));
 
         _spokyAnim = GetComponent<HumanoidAnimations>();
     }
@@ -44,10 +43,8 @@ public class SpokeyShotCombat : MonoBehaviour, IDamageable
     void Update() {
         if (_spokey.health > 0) {
 
-            _pointA = new Vector2(_spokey.spookyEyes.position.x + attackMimRange, _spokey.spookyEyes.position.y - (areaSizeY / 2));
-            _pointB = new Vector2(_spokey.spookyEyes.position.x + attackMaxRange, _spokey.spookyEyes.position.y + (areaSizeY / 2));
-
-            FlipPoints();
+            _pointA = new Vector2(_spokey.spookyEyes.position.x - (attackRange / 2), _spokey.spookyEyes.position.y - (areaSizeY / 2));
+            _pointB = new Vector2(_spokey.spookyEyes.position.x + (attackRange / 2), _spokey.spookyEyes.position.y + (areaSizeY / 2));
 
             CanAttackPlayer();
 
@@ -63,17 +60,6 @@ public class SpokeyShotCombat : MonoBehaviour, IDamageable
         }
         else {
             inSpookRange = false;
-        }
-    }
-
-    private void FlipPoints() {
-        if (transform.localScale.x == -1 && attackMaxRange == Mathf.Abs(attackMaxRange)) {
-            attackMaxRange *= -1;
-            attackMimRange *= -1;
-        }
-        else if (transform.localScale.x == 1 && attackMaxRange != Mathf.Abs(attackMaxRange)) {
-            attackMaxRange = Mathf.Abs(attackMaxRange);
-            attackMimRange = Mathf.Abs(attackMimRange);
         }
     }
 
