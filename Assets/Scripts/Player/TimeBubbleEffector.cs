@@ -44,6 +44,10 @@ public class TimeBubbleEffector : MonoBehaviour
             else if (collision.GetComponent<Projectile>()) {
                 collision.GetComponent<Projectile>().movementSpeed *= timeModifier;
             }
+
+            else if (collision.GetComponent<Smasher>()) {
+                collision.GetComponent<Smasher>().movementSpeed *= timeModifier;
+            }
         }
     }
 
@@ -66,6 +70,9 @@ public class TimeBubbleEffector : MonoBehaviour
             }
             else if (collision.GetComponent<Projectile>()) {
                 collision.GetComponent<Projectile>().movementSpeed *= normalTimeModiffier;
+            }
+            else if (collision.GetComponent<Smasher>()) {
+                collision.GetComponent<Smasher>().movementSpeed *= normalTimeModiffier;
             }
         }
     }

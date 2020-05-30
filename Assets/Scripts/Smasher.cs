@@ -13,7 +13,7 @@ public class Smasher : MonoBehaviour
     public float smashTime = 2f;
     //public float timeToWait = 0.5f;
 
-    public float smashSpeed = 4f;
+    public float movementSpeed = 4f;
     public int smashDamage;
 
     private float _minimumDistanceY = 0.01f;
@@ -21,30 +21,30 @@ public class Smasher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         _smashInicialPosition = transform.localPosition;
         _currentSmachTime = smashTime;
         _retractingSmash = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (_currentSmachTime > 0) {
             _currentSmachTime -= Time.deltaTime;
         }
         else if (_currentSmachTime <= 0 && !_retractingSmash) {
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y -(smashSpeed * Time.deltaTime), transform.localPosition.z);
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y -(movementSpeed * Time.deltaTime), transform.localPosition.z);
         }
         else if (_currentSmachTime <= 0 && _retractingSmash && Mathf.Abs( transform.localPosition.y - _smashInicialPosition.y) > _minimumDistanceY) {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, _smashInicialPosition, smashSpeed * Time.deltaTime);
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, _smashInicialPosition, movementSpeed * Time.deltaTime);
         }
         else if (_currentSmachTime <= 0 && _retractingSmash && Mathf.Abs(transform.localPosition.y - _smashInicialPosition.y) <= _minimumDistanceY) {
             transform.localPosition = _smashInicialPosition;
             _retractingSmash = false;
             _currentSmachTime = smashTime;
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
