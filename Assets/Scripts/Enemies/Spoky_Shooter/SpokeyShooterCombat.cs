@@ -48,7 +48,8 @@ public class SpokeyShooterCombat : MonoBehaviour, IDamageable
 
             CanAttackPlayer();
 
-            if (inSpookRange) {
+            if (inSpookRange && !isSpooking) {
+                _spokey.spokeyMovement.ChangeDirection(PlayerStatus.player.transform.position);
                 SetAttackAnim();
             }
         }
@@ -156,7 +157,6 @@ public class SpokeyShooterCombat : MonoBehaviour, IDamageable
 
             yield return null;
         }
-        print(i + " " + aux);
     }
 
     private void OnDrawGizmosSelected() {

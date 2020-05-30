@@ -51,7 +51,7 @@ public class SpokyMovement : MonoBehaviour
                     Movement(PlayerStatus.player.transform.position);
                     ChangeDirection(PlayerStatus.player.transform.position);
                 }
-                else { //is attacking player
+                else {
                     _enemyAnim.SetVelocity(Vector2.zero);
                 }
             }
@@ -61,7 +61,7 @@ public class SpokyMovement : MonoBehaviour
     private void Wander() {
         if (wanderTimer < 0) {
 
-            if (Vector2.Distance(transform.position, _wanderPos) >= _minimumTargetDistance) {
+            if (Vector2.Distance(transform.position, _wanderPos) >= _minimumTargetDistance && !GoingToTheAbyss()) {
                 Movement(_wanderPos);
             }
             else {
@@ -108,19 +108,19 @@ public class SpokyMovement : MonoBehaviour
         float leftTarget;
 
         //raycast rigth
-        raycastHitRigth = Physics2D.Raycast(_spoky.spookyEyes.position, Vector2.right, wanderRange, groundLayer);
+        raycastHitRigth = Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.right, wanderRange, groundLayer);
         //raycast left
-        raycastHitLeft = Physics2D.Raycast(_spoky.spookyEyes.position, Vector2.left, wanderRange, groundLayer);
+        raycastHitLeft = Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.left, wanderRange, groundLayer);
 
         #region CHECKING WHERE TO PUT WANDER POINTS
-        if (raycastHitRigth = Physics2D.Raycast(_spoky.spookyEyes.position, Vector2.right, wanderRange, groundLayer)) {
+        if (raycastHitRigth = Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.right, wanderRange, groundLayer)) {
             rigthTarget = Random.Range(transform.position.x + _xOffset, raycastHitRigth.point.x - _xOffset);
         }
         else {
             rigthTarget = Random.Range(transform.position.x + _xOffset, (transform.position.x + wanderRange));
         }
 
-        if (raycastHitLeft = Physics2D.Raycast(_spoky.spookyEyes.position, Vector2.left, wanderRange, groundLayer)) {
+        if (raycastHitLeft = Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.left, wanderRange, groundLayer)) {
             leftTarget = Random.Range(transform.position.x - _xOffset, raycastHitLeft.point.x + _xOffset);
         }
         else {
@@ -152,7 +152,6 @@ public class SpokyMovement : MonoBehaviour
         }
 
         #endregion
-        //print(_wanderPos.x);
 
     }
 
@@ -177,6 +176,15 @@ public class SpokyMovement : MonoBehaviour
             transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
 
+    }
+
+    private bool GoingToTheAbyss() {
+        RaycastHit2D abyss;
+
+        if (abyss = Physics2D.Raycast(_spoky.abbys.position, Vector2.down, 0.1f, groundLayer)) {
+            return false;
+        }
+        return true;
     }
 
     public void PersuitPlayer(bool value) {

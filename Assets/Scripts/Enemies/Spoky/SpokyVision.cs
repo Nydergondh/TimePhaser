@@ -6,7 +6,7 @@ public class SpokyVision : MonoBehaviour
 {
     public float visionRange = 3f;
 
-    public float areaSizeY = 0.5f;// PointA.y = transform.position.y + (areaSizeY/2)
+    public float areaSizeY = 0.25f;// PointA.y = transform.position.y + (areaSizeY/2)
                                   // PointB.y = transform.position.y - (areaSizeY/2)
     private Vector2 _pointA;
     private Vector2 _pointB;
@@ -16,7 +16,8 @@ public class SpokyVision : MonoBehaviour
 
     public bool seeingPlayer = false;
 
-    public LayerMask layer;
+    public LayerMask playerLayer;
+    public LayerMask groundLayer;
 
     // Start is called before the first frame update
     void Start() {
@@ -32,19 +33,45 @@ public class SpokyVision : MonoBehaviour
             _pointA = new Vector2(_spoky.spookyEyes.position.x - (visionRange / 2), _spoky.spookyEyes.position.y - (areaSizeY / 2));
             _pointB = new Vector2(_spoky.spookyEyes.position.x + (visionRange / 2), _spoky.spookyEyes.position.y + (areaSizeY / 2));
 
-            //FlipPoints();
-
             PersuitPlayer();
         }
     }
 
     private void PersuitPlayer() {
-        if (_playerCollider = Physics2D.OverlapArea(_pointA, _pointB, layer)) {
-            _spoky.spokyMovement.PersuitPlayer(true);
+        float distance;
+        if (_playerCollider = Physics2D.OverlapArea(_pointA, _pointB, playerLayer)) {
+            distance = _spoky.raycastDetect.position.x - _playerCollider.transform.position.x;
+            if (RayTest(distance)) {
+                _spoky.spokyMovement.PersuitPlayer(true);
+            }
+            else {
+                _spoky.spokyMovement.PersuitPlayer(false);
+            }
         }
         else {
             _spoky.spokyMovement.PersuitPlayer(false);
         }
+    }
+
+    private bool RayTest(float distance) {
+        if (distance > 0) {
+            if (!Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.left, Mathf.Abs(distance), groundLayer)) {
+                print("No Wall");
+                if (GoingToTheAbyss()) {
+                    return false;
+                }
+            }
+        }
+        else if(distance < 0) {
+            if (!Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.right, Mathf.Abs(distance), groundLayer)) {
+                print("No Wall");
+                if (GoingToTheAbyss()) {
+                    return false;
+                }
+            }
+        }
+        print("Passed");
+        return true;
     }
     /*
     private void FlipPoints() {
@@ -58,6 +85,18 @@ public class SpokyVision : MonoBehaviour
         }
     }
     */
+    private bool GoingToTheAbyss() {
+        RaycastHit2D abyss;
+        Vector2 targetPos = new Vector2(PlayerStatus.player.transform.position.x, _spoky.abbys.position.y);
+
+        if (abyss = Physics2D.Raycast(targetPos, Vector2.down, 0.1f, groundLayer)) {
+            print("Abbys");
+            return false;
+        }
+        print("Not Abbys");
+        return true;
+    }
+
     private void OnDrawGizmosSelected() {
         try {
             Gizmos.color = Color.green;
@@ -79,6 +118,17 @@ public class SpokyVision : MonoBehaviour
 
             pointA = pointB;
             pointB = _pointA;
+
+            Gizmos.DrawLine(pointA, pointB);
+
+            pointA = _spoky.abbys.position;
+            pointB = new Vector2(PlayerStatus.player.transform.position.x, _spoky.abbys.position.y);
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(pointA, pointB);
+
+            pointA = pointB;
+            pointB = new Vector2(pointA.x, _spoky.abbys.position.y - 0.1f);
 
             Gizmos.DrawLine(pointA, pointB);
         }

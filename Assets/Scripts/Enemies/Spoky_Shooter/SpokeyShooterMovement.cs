@@ -45,7 +45,6 @@ public class SpokeyShooterMovement : MonoBehaviour
             else {
                 if (_spokey.spokeyCombat.inSpookRange || _spokey.spokeyCombat.isSpooking) { // player is in vision
                     _enemyAnim.SetVelocity(Vector2.zero);
-                    ChangeDirection(PlayerStatus.player.transform.position); //TODO: if enough time is left check for more efficient call
                 }
             }
         }
@@ -54,11 +53,12 @@ public class SpokeyShooterMovement : MonoBehaviour
     private void Wander() {
         if (wanderTimer < 0) {
 
-            if (Vector2.Distance(transform.position, _wanderPos) >= _minimumTargetDistance && !GoingToTheAbyss()) {
+            if (Vector2.Distance(transform.position, _wanderPos) >= _minimumTargetDistance && !GoingToTheAbyss()) { //TODO Check This
                 Movement(_wanderPos);
                 ChangeDirection(_wanderPos); //TODO: if enough time is left check for more efficient call
             }
             else {
+
                 wanderTimer = timeToWait;
                 _enemyAnim.SetVelocity(Vector2.zero);
 
@@ -132,12 +132,12 @@ public class SpokeyShooterMovement : MonoBehaviour
         #region CHOOSING ONE OF THE TWO POINTS
 
 
-        //if went rigth last time go left
+        //if went rigth last time | go left
         if (GetTransformOldDirection() == 1) {
             _oldWanderPos = _wanderPos;
             _wanderPos = new Vector2(leftTarget, transform.position.y);
         }
-        //if went left last time go rigth
+        //if went left last time | go rigth
         else if (GetTransformOldDirection() == -1) {
             _oldWanderPos = _wanderPos;
             _wanderPos = new Vector2(rigthTarget, transform.position.y);
@@ -176,7 +176,7 @@ public class SpokeyShooterMovement : MonoBehaviour
         return true;
     }
 
-    private void ChangeDirection(Vector2 target) {
+    public void ChangeDirection(Vector2 target) {
 
         if (target.x < transform.position.x) {
             transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);

@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &221557324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 221557325}
+  m_Layer: 10
+  m_Name: Abbys_Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &221557325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221557324}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1224628909001756536}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1162092166432125988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7783957709401069925}
+  m_Layer: 10
+  m_Name: RayCast_Detect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7783957709401069925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162092166432125988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.175, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1224628909001756536}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1224628908722013150
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +202,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224628909001756530}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -150,6 +210,8 @@ Transform:
   - {fileID: 1224628908722013145}
   - {fileID: 1224628910027780526}
   - {fileID: 1224628909639893282}
+  - {fileID: 7783957709401069925}
+  - {fileID: 221557325}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -208,6 +270,8 @@ MonoBehaviour:
   spokyMovement: {fileID: 0}
   spokyCombat: {fileID: 0}
   spookyEyes: {fileID: 1224628908989088993}
+  raycastDetect: {fileID: 7783957709401069925}
+  abbys: {fileID: 221557325}
   _renderer: {fileID: 1224628908722013144}
 --- !u!114 &1224628909001756540
 MonoBehaviour:
@@ -222,11 +286,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionRange: 3
-  areaSizeY: 0.5
+  areaSizeY: 0.25
   seeingPlayer: 0
-  layer:
+  playerLayer:
     serializedVersion: 2
     m_Bits: 2048
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &1224628909001756541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +327,7 @@ MonoBehaviour:
   isSpoked: 0
   attackMaxRange: 0.6
   attackMimRange: 0.25
-  areaSizeY: -0.5
+  areaSizeY: -0.25
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048

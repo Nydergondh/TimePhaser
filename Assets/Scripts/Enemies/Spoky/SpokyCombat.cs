@@ -59,7 +59,7 @@ public class SpokyCombat : MonoBehaviour, IDamageable
     }
 
     private void CanAttackPlayer() {
-        if (_playerCollider = Physics2D.OverlapArea(_pointA, _pointB, playerLayer)) {
+        if (_playerCollider = Physics2D.OverlapArea(_pointA, _pointB, playerLayer)) { 
             inSpookRange = true;
             //_playerCollider.GetComponent<PlayerCombat>().OnDamage(_spoky.damage);
         }

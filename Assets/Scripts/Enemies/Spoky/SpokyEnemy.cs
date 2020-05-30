@@ -15,6 +15,8 @@ public class SpokyEnemy : MonoBehaviour
     public SpokyCombat spokyCombat;
 
     public Transform spookyEyes;
+    public Transform raycastDetect;
+    public Transform abbys;
 
     public SpriteRenderer _renderer;
 
