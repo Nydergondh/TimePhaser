@@ -54,20 +54,21 @@ public class SpokyVision : MonoBehaviour
     }
 
     private bool RayTest(float distance) {
-        if (distance > 0) {
-            if (!Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.left, Mathf.Abs(distance), groundLayer)) {
-                print("No Wall");
-                if (GoingToTheAbyss()) {
-                    return false;
-                }
+
+        RaycastHit2D rayCastHit;
+
+        if (distance < 0) {
+            print("Going Rigth");
+            if ((rayCastHit = Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.right, Mathf.Abs(distance), groundLayer)) || GoingToTheAbyss()) {
+                print(rayCastHit.point);
+                return false;
             }
         }
-        else if(distance < 0) {
-            if (!Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.right, Mathf.Abs(distance), groundLayer)) {
-                print("No Wall");
-                if (GoingToTheAbyss()) {
-                    return false;
-                }
+        else if(distance > 0) {
+            print("Going Left");
+            if ((rayCastHit = Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.left, Mathf.Abs(distance), groundLayer)) || GoingToTheAbyss()) {
+                print(rayCastHit.point);
+                return false;
             }
         }
         print("Passed");
@@ -129,6 +130,13 @@ public class SpokyVision : MonoBehaviour
 
             pointA = pointB;
             pointB = new Vector2(pointA.x, _spoky.abbys.position.y - 0.1f);
+
+            Gizmos.DrawLine(pointA, pointB);
+
+            Gizmos.color = Color.blue;
+
+            pointA = _spoky.raycastDetect.position;
+            pointB = new Vector2(PlayerStatus.player.transform.position.x, _spoky.raycastDetect.position.y);
 
             Gizmos.DrawLine(pointA, pointB);
         }

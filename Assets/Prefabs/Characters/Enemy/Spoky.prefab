@@ -271,7 +271,7 @@ MonoBehaviour:
   spokyCombat: {fileID: 0}
   spookyEyes: {fileID: 1224628908989088993}
   raycastDetect: {fileID: 7783957709401069925}
-  abbys: {fileID: 221557325}
+  abbys: {fileID: 0}
   _renderer: {fileID: 1224628908722013144}
 --- !u!114 &1224628909001756540
 MonoBehaviour:
