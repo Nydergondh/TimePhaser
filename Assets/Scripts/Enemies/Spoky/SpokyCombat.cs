@@ -80,9 +80,11 @@ public class SpokyCombat : MonoBehaviour, IDamageable
     }
 
     public void OnDamage(int damage) {
-
-        float rand;
         GameObject damagePopUp;
+        float rand;
+
+        rand = Random.Range(0.8f, 1.2f);
+        damage = (int)(rand * damage);
 
         if (_spoky.health > 0) {
             _spoky.health -= damage;
@@ -106,7 +108,6 @@ public class SpokyCombat : MonoBehaviour, IDamageable
 
             _spokyAnim.SetHit(true, _spoky.health);
         }
-
     }
 
 

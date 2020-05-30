@@ -10,8 +10,7 @@ public class UISliderController : MonoBehaviour
 
     private int _value;
 
-    [SerializeField]
-    private SliderType _sliderType;
+    public SliderType _sliderType;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +21,6 @@ public class UISliderController : MonoBehaviour
         int.TryParse(_textComponent.text,out _value);
 
         PlayerStatus.player.attUI += UpdateUI;
-
 
         if (_sliderType == SliderType.Health) {
             _slider.maxValue = PlayerStatus.player.health;

@@ -11,6 +11,7 @@ public class PlayerStatus : MonoBehaviour
     public PlayerGroundCollision playerGround;
 
     public Transform damageUISpawnPoint;
+    public Transform followTransform;
 
     public int maxDamage = 50;
     public int maxEnergy = 50;

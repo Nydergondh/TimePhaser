@@ -19,6 +19,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     [SerializeField]
     private bool _isTimeBubbling = false;
     public bool _isHurt = false;
+    private bool _isInvincible = false;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +56,14 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     }
 
     public void InstaciateTimeBubble() {
-        Instantiate(bubblePrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity, bubbleParent);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 desiredPos = new Vector3(mousePos.x, mousePos.y, 0);
+
+        Instantiate(bubblePrefab, desiredPos, Quaternion.identity, bubbleParent);
+    }
+
+    public void SetInvincible(bool value) {
+        _isInvincible = value;
     }
 
     public void OnDamage(int damage) {
@@ -63,27 +71,39 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         float rand;
         GameObject damagePopUp;
 
-        rand = Random.Range(0.8f, 1.2f);
-        damage = (int)(rand * damage);
-        
-        if (PlayerStatus.player.health > 0) {
-            PlayerStatus.player.health -= damage;      
+        if (PlayerStatus.player.health > 0) { //kinda shitty logic here (test health twice) Too bad :/
 
-            if (_isAttacking || _isTimeBubbling) {
-                UnsetPlayerAttack();
-                UnsetPlayerBubble();
-                PlayerStatus.player.playerMovement.UnfreezeMovement();
+            if (!_isInvincible) {
+                rand = Random.Range(0.8f, 1.2f);
+                damage = (int)(rand * damage);
+
+                if (PlayerStatus.player.health > 0) {
+                    PlayerStatus.player.health -= damage;
+
+                    if (_isAttacking || _isTimeBubbling) {
+                        UnsetPlayerAttack();
+                        UnsetPlayerBubble();
+                        PlayerStatus.player.playerMovement.UnfreezeMovement();
+                    }
+                    _isHurt = true;
+
+                    _playerAnim.SetHit(true, PlayerStatus.player.health);
+
+                    damagePopUp = Instantiate(textDamage, PlayerStatus.player.damageUISpawnPoint.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
+                    damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
+
+                    StartCoroutine(InivisibilityFrames());
+                    PlayerStatus.player.attUI?.Invoke(PlayerStatus.player.health, UISliderController.SliderType.Health);
+                }
+                else {
+                    damagePopUp = Instantiate(textDamage, PlayerStatus.player.damageUISpawnPoint.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
+                    damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
+
+                    PlayerStatus.player.attUI?.Invoke(0, UISliderController.SliderType.Health);
+                }
+
             }
-            _isHurt = true;            
-           
-            _playerAnim.SetHit(true, PlayerStatus.player.health); //play the animation
         }
-
-
-        damagePopUp = Instantiate(textDamage, PlayerStatus.player.damageUISpawnPoint.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
-        damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
-
-        PlayerStatus.player.attUI?.Invoke(PlayerStatus.player.health, UISliderController.SliderType.Health);
     }
 
     private void SetPlayerAttack() {
@@ -128,38 +148,10 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         _isHurt = true;
     }
 
-    //public IEnumerator ChangeColor() {
+    public IEnumerator InivisibilityFrames() {
+        _isInvincible = true;
+        yield return new WaitForSeconds(1f);
+        _isInvincible = false;
+    }
 
-    //    int i = 0;
-    //    float aux = 0;
-
-    //    while (colorChangeTimer < colorChangeCD) {
-    //        colorChangeTimer += Time.deltaTime;
-    //        _spoky._renderer.material.SetFloat("_Hit", 1);
-
-    //        i++;
-    //        aux += Time.deltaTime;
-
-    //        if (colorChangeTimer >= colorChangeCD) {
-    //            colorChangeTimer = colorChangeCD;
-    //        }
-
-    //        yield return null;
-    //    }
-
-    //    while (colorChangeTimer > 0) {
-    //        colorChangeTimer -= Time.deltaTime;
-    //        _spoky._renderer.material.SetFloat("_Hit", colorChangeTimer);
-
-    //        i++;
-    //        aux += Time.deltaTime;
-
-    //        if (colorChangeTimer <= 0) {
-    //            colorChangeTimer = 0;
-    //        }
-
-    //        yield return null;
-    //    }
-    //    print(i + " " + aux);
-    //}
 }

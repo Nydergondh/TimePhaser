@@ -157,9 +157,23 @@ public class PlayerMovement : MonoBehaviour
         }
 
         else {
-            vel = Vector2.zero;
-            playerAnim.SetVelocity(vel);
-            rigidbody.velocity = vel;
+
+            if (PlayerStatus.player.health > 0) {
+                vel = Vector2.zero;
+                playerAnim.SetVelocity(vel);
+                rigidbody.velocity = vel;
+            }
+            else {
+                SetGrounded(); //check if is hitting ground
+                if (isTouchingGround) {
+                    playerAnim.SetVelocity(rigidbody.velocity);
+                    rigidbody.velocity = Vector2.zero;
+                }
+                else {
+                    playerAnim.SetVelocity(rigidbody.velocity);
+                }
+                
+            }
         }
 
     }
@@ -203,6 +217,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public bool GetFreezeMovement() {
+        return _freezeMovement;
+    }
 
     public void StopDash() {
         _dashing = false;

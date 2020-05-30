@@ -13,8 +13,8 @@ public class PlayerGroundCollision : MonoBehaviour
 
     private Collider2D _plataformCollider;
 
-    private float _canDuckTimer = 0f;
-    private float _canDuckCD = 0.25f;
+    //private float _canDuckTimer = 0f;
+    //private float _canDuckCD = 0.25f;
 
     private ContactFilter2D colFilter = new ContactFilter2D();
     private Collider2D[] result = new Collider2D[1];
@@ -32,13 +32,15 @@ public class PlayerGroundCollision : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-
-        FallPlataform();
+        if (PlayerStatus.player.health > 0) {
+            FallPlataform();
+        }
+         
 
     }
 
     public void FallPlataform() {
-        if (Input.GetButton("Duck")) {
+        if (Input.GetButton("Duck") && !PlayerStatus.player.playerMovement.GetFreezeMovement()) {
 
             if (feetCollider.OverlapCollider(colFilter, result) > 0) {
                 if (_plataformEffector != null) {
