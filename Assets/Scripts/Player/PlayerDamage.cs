@@ -15,6 +15,8 @@ public class PlayerDamage : MonoBehaviour
 
                 collision.GetComponent<IDamageable>().OnDamage(PlayerStatus.player.damage);
 
+                PlayPunchSound();
+
                 if (PlayerStatus.player.playerMovement.deltaY != 0) {
                     StartCoroutine(PlayerStatus.player.playerMovement.MiniFreezePlayer());
                 }
@@ -29,5 +31,9 @@ public class PlayerDamage : MonoBehaviour
         hitParticleObj.GetComponentInChildren<ParticleSystem>().Play();
 
         Destroy(hitParticleObj, 2f);
+    }
+
+    public void PlayPunchSound() {
+        PlayerStatus.player.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.PunchHit));
     }
 }

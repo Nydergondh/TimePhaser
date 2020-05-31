@@ -144,9 +144,12 @@ public class BossCombat : MonoBehaviour, IDamageable
                 AttBossPatern();
 
                 if (Boss.boss.health > 0) {
-                    if (colorChangeTimer <= 0) {
-                        StartCoroutine(ChangeColor());
-                    }
+
+                    StopCoroutine(ChangeColor()); //if hitted again while doing the change color coroutine stop it and start a new one
+                    colorChangeTimer = colorChangeCD;
+
+                    StartCoroutine(ChangeColor());
+
                 }
                 _bossAnim.SetHit(true, Boss.boss.health);
 
@@ -193,7 +196,7 @@ public class BossCombat : MonoBehaviour, IDamageable
 
         while (colorChangeTimer < colorChangeCD) {
             colorChangeTimer += Time.deltaTime;
-            //Boss.boss._renderer.material.SetFloat("_Hit", 1);
+            Boss.boss._renderer.material.SetFloat("_Hit", 1);
 
             i++;
             aux += Time.deltaTime;
@@ -207,7 +210,7 @@ public class BossCombat : MonoBehaviour, IDamageable
 
         while (colorChangeTimer > 0) {
             colorChangeTimer -= Time.deltaTime;
-            //Boss.boss._renderer.material.SetFloat("_Hit", colorChangeTimer);
+            Boss.boss._renderer.material.SetFloat("_Hit", colorChangeTimer);
 
             i++;
             aux += Time.deltaTime;

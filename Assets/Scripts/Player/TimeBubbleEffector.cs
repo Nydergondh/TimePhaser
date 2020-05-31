@@ -14,9 +14,13 @@ public class TimeBubbleEffector : MonoBehaviour
     private float normalTimeModiffier = 4;
 
     private Animator anim;
+    private AudioSource _audioSource;
 
     private void Start() {
         bubbleCollider = GetComponent<Collider2D>();
+        _audioSource = GetComponent<AudioSource>();
+
+        _audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.TimeBubble));
 
         PlayerStatus.player.WithdrawEnergy(25);
     }
@@ -25,17 +29,26 @@ public class TimeBubbleEffector : MonoBehaviour
 
         if (bubbleCollider.IsTouchingLayers(effectedLayers)) {
             //slow down animator
+            //slow down animator and velocities
             if (collision.GetComponent<SpokyEnemy>()) {
                 if (collision.GetComponent<Animator>() != null) {
                     collision.GetComponent<Animator>().speed = timeModifier;
                 }
                 collision.GetComponent<SpokyEnemy>().movementSpeed *= timeModifier;
+
+                //modify sounds to be slower
+                collision.GetComponent<SpokyEnemy>().affectedTime = true;
+                collision.GetComponent<SpokyEnemy>().audioSource.pitch *= timeModifier;
             }
+
             else if (collision.GetComponent<SpokeyShooterEnemy>()) {
                 if (collision.GetComponent<Animator>() != null) {
                     collision.GetComponent<Animator>().speed *= timeModifier;
                 }
                 collision.GetComponent<SpokeyShooterEnemy>().movementSpeed *= timeModifier;
+
+                collision.GetComponent<SpokeyShooterEnemy>().affectedTime = true;
+                collision.GetComponent<SpokeyShooterEnemy>().audioSource.pitch *= timeModifier;
             }
 
             else if (collision.GetComponent<Projectile>()) {
@@ -44,19 +57,24 @@ public class TimeBubbleEffector : MonoBehaviour
 
             else if (collision.GetComponent<Smasher>()) {
                 collision.GetComponent<Smasher>().movementSpeed *= timeModifier;
+
+                collision.GetComponent<Smasher>().audioSource.pitch *= timeModifier;
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (effectedLayers.value == (effectedLayers | (1 << collision.gameObject.layer))) {
-            //effectdColliders.Remove(collision);
-            //speed up animator
+            //speed up animator and velocities
             if (collision.GetComponent<SpokyEnemy>()) {
                 if (collision.GetComponent<Animator>() != null) {
                     collision.GetComponent<Animator>().speed = 1;
                 }
                 collision.GetComponent<SpokyEnemy>().movementSpeed *= normalTimeModiffier;
+
+                //modify sounds to be normal
+                collision.GetComponent<SpokyEnemy>().affectedTime = false;
+                collision.GetComponent<SpokyEnemy>().audioSource.pitch *= normalTimeModiffier;
             }
 
            else if (collision.GetComponent<SpokeyShooterEnemy>()) {
@@ -64,13 +82,21 @@ public class TimeBubbleEffector : MonoBehaviour
                     collision.GetComponent<Animator>().speed = 1;
                 }
                 collision.GetComponent<SpokeyShooterEnemy>().movementSpeed *= normalTimeModiffier;
+
+                collision.GetComponent<SpokeyShooterEnemy>().affectedTime = false;
+                collision.GetComponent<SpokeyShooterEnemy>().audioSource.pitch *= normalTimeModiffier;
             }
+
             else if (collision.GetComponent<Projectile>()) {
                 collision.GetComponent<Projectile>().movementSpeed *= normalTimeModiffier;
             }
+
             else if (collision.GetComponent<Smasher>()) {
                 collision.GetComponent<Smasher>().movementSpeed *= normalTimeModiffier;
+
+                collision.GetComponent<Smasher>().audioSource.pitch *= normalTimeModiffier;
             }
+
         }
     }
     

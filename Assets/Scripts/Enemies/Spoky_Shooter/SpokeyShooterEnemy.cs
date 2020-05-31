@@ -9,19 +9,26 @@ public class SpokeyShooterEnemy : MonoBehaviour {
     public int health = 100;
     public int damage = 10;
 
-    public SpokeyShooterVision spokeyVision;
-    public SpokeyShooterMovement spokeyMovement;
-    public SpokeyShooterCombat spokeyCombat;
+    [HideInInspector]  public SpokeyShooterVision spokeyVision;
+    [HideInInspector]  public SpokeyShooterMovement spokeyMovement;
+    [HideInInspector]  public SpokeyShooterCombat spokeyCombat;
 
     public Transform spookyEyes;
     public Transform bulletSpawnPoint;
 
     public SpriteRenderer _renderer;
 
+    public bool affectedTime = false;
+
+    [HideInInspector]
+    public AudioSource audioSource;
+
     private void Start() {
         spokeyVision = GetComponent<SpokeyShooterVision>();
         spokeyMovement = GetComponent<SpokeyShooterMovement>();
         spokeyCombat = GetComponent<SpokeyShooterCombat>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
 }

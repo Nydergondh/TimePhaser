@@ -10,7 +10,9 @@ public class Projectile : MonoBehaviour {
 
     private SpriteRenderer _spriteRenderer;
     private Collider2D _bulletCollider;
+    private AudioSource _audioSource;
 
+    private bool _collided= false;
     public bool goingHorizontal = true;
     public bool penetrateWall = false;
 
@@ -19,20 +21,20 @@ public class Projectile : MonoBehaviour {
 
     private void Start() {
 
-        if (penetrateWall) {
-            Destroy(gameObject, 7f);
-        }
+        Destroy(gameObject, 7f);
 
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
         _bulletCollider = GetComponent<Collider2D>();
     }
 
     private void Update() {
-        if (goingHorizontal) { // Going Horizontaly (Direction setted in the enemy)
-            transform.position = new Vector3(transform.position.x + (movementSpeed * Time.deltaTime), transform.position.y,transform.position.z);
-        }
-        else { // Going Downwards
-            transform.position = new Vector3(transform.position.x, transform.position.y - (movementSpeed * Time.deltaTime), transform.position.z); 
+        if (!_collided) {
+            if (goingHorizontal) { // Going Horizontaly (Direction setted in the enemy)
+                transform.position = new Vector3(transform.position.x + (movementSpeed * Time.deltaTime), transform.position.y,transform.position.z);
+            }
+            else { // Going Downwards
+                transform.position = new Vector3(transform.position.x, transform.position.y - (movementSpeed * Time.deltaTime), transform.position.z); 
+            }
         }
     }
 
@@ -40,17 +42,30 @@ public class Projectile : MonoBehaviour {
         
         if (playerLayer == (playerLayer | 1 << collision.gameObject.layer)) {
             if (collision.GetComponent<IDamageable>() != null) {
-                collision.GetComponent<IDamageable>().OnDamage(damage);
+                
+                _collided = true; //makes the projectile stop
+                collision.GetComponent<IDamageable>().OnDamage(damage); // applys damage
+
                 SpawnParticles(collision);
-                //UnsetBulletParameters();
-                Destroy(gameObject);
+                _audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.ProjectileCollide)); // plays audio on collision
+
+                UnsetBulletParameters();//disable sprite and collider
+
+                Destroy(gameObject, 0.5f);
             }
 
         }
         else if (groundLayer == (groundLayer | 1 << collision.gameObject.layer) && !penetrateWall) {
+            _collided = true;
+
             SpawnParticles(collision);
-            Destroy(gameObject);
+            _audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.ProjectileCollide));
+
+            UnsetBulletParameters();
+
+            Destroy(gameObject,0.5f);
         }
+
     }
 
     private void SpawnParticles(Collider2D collision) {
@@ -62,7 +77,11 @@ public class Projectile : MonoBehaviour {
     }
     
     private void UnsetBulletParameters() {
-        _spriteRenderer.enabled = false;
+
+        foreach (Transform obj in transform) {
+            obj.gameObject.SetActive(false);
+        }
+
         _bulletCollider.enabled = false;
     }
 }

@@ -18,6 +18,7 @@ public class Smasher : MonoBehaviour
 
     private float _minimumDistanceY = 0.01f;
     private bool _retractingSmash;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,14 +50,18 @@ public class Smasher : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         IDamageable damageableComponent;
-
+        //makes the smasher go back if it hits the player or ground
         if (groundLayer.value == (groundLayer | (1 << collision.gameObject.layer))) {
             _retractingSmash = true;
+            //plays smasher sounds
+            audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Smash));
         }
         else if (playerLayer.value == (playerLayer | (1 << collision.gameObject.layer))) {
             _retractingSmash = true;
             if (collision.gameObject.TryGetComponent<IDamageable>(out damageableComponent)) {
                 damageableComponent.OnDamage(smashDamage);
+                //plays smasher sounds
+                audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Smash));
             }
         }
     }

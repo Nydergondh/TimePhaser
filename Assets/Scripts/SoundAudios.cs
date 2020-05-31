@@ -23,7 +23,8 @@ public class SoundAudios : MonoBehaviour
     }
 
     public enum Sound {
-        Punch,
+        PunchHit,
+        PunchWoosh,
         EnemyHurt,
         EnemyAttack,
         EnemyGun,
@@ -36,5 +37,7 @@ public class SoundAudios : MonoBehaviour
         BossRoar,
         BossScream,
         BossExplode,
+        Collectable,
+        TimeBubble
     }
 }

@@ -17,9 +17,11 @@ public class PickUps : MonoBehaviour
     public PickUpType pickUp;
 
     private SpriteRenderer _renderer;
+    private AudioSource _audioSource;
 
     private void Start() {
         _renderer = GetComponentInChildren<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -29,27 +31,30 @@ public class PickUps : MonoBehaviour
                     if (PlayerStatus.player.energy < PlayerStatus.player.maxEnergy) {
 
                         PlayerStatus.player.AddEnergy(pickUpValue);
-                        if (!respawnable) {
-                            Destroy(gameObject);
-                        }
-                        else {
-                            StartCoroutine(Respawn());
-                        }
+                        ConsumePickUp();
 
                     }
                 }
                 else if(pickUp == PickUpType.Health) {
                     if (PlayerStatus.player.health < PlayerStatus.player.maxHealth) {
                         PlayerStatus.player.AddHealth(pickUpValue);
-                        if (!respawnable) {
-                            Destroy(gameObject);
-                        }
-                        else {
-                            StartCoroutine(Respawn());
-                        }
+
+                        ConsumePickUp();
                     }
                 }
             }
+        }
+    }
+
+    private void ConsumePickUp() {
+        if (!respawnable) {
+            _audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Collectable));
+            UnsetPickUpParameters();
+            Destroy(gameObject, 1);
+        }
+        else {
+            _audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Collectable));
+            StartCoroutine(Respawn());
         }
     }
 
@@ -64,7 +69,9 @@ public class PickUps : MonoBehaviour
     private IEnumerator Respawn() {
         isRespawning = true;
         DisableSprite();
+
         yield return new WaitForSeconds(respawnTime);
+
         EnableSprite();
         isRespawning = false;
     }
@@ -72,5 +79,15 @@ public class PickUps : MonoBehaviour
     public enum PickUpType {
         Energy,
         Health
+    }
+
+    private void UnsetPickUpParameters() {
+
+        foreach (Transform obj in transform) {
+            obj.gameObject.SetActive(false);
+        }
+
+        GetComponent<Collider2D>().enabled = false;
+
     }
 }

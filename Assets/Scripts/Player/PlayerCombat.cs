@@ -91,8 +91,8 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
                     damagePopUp = Instantiate(textDamage, PlayerStatus.player.damageUISpawnPoint.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
                     damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
-
-                    StartCoroutine(InivisibilityFrames());//add invicibility frames
+                    //add invicibility frames
+                    StartCoroutine(InivisibilityFrames());
                     //update UI
                     PlayerStatus.player.attUI?.Invoke(PlayerStatus.player.health, UISliderController.SliderType.Health);
                     //play sound
@@ -114,8 +114,8 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         }
     }
 
-    public void PlayPunchSound() {
-        PlayerStatus.player.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Punch));
+    public void PlayWooshSound() {
+        PlayerStatus.player.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.PunchWoosh));
     }
 
     private void SetPlayerAttack() {

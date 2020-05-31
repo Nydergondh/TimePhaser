@@ -10,9 +10,9 @@ public class SpokyEnemy : MonoBehaviour, IDamage
     public int health = 100;
     public int damage = 10;
 
-    public SpokyVision spokyVision;
-    public SpokyMovement spokyMovement;
-    public SpokyCombat spokyCombat;
+    [HideInInspector] public SpokyVision spokyVision;
+    [HideInInspector] public SpokyMovement spokyMovement;
+    [HideInInspector] public SpokyCombat spokyCombat;
 
     public Transform spookyEyes;
     public Transform raycastDetect;
@@ -20,10 +20,17 @@ public class SpokyEnemy : MonoBehaviour, IDamage
 
     public SpriteRenderer _renderer;
 
+    public bool affectedTime = false;
+
+    [HideInInspector]
+    public AudioSource audioSource;
+
     private void Start() {
         spokyVision = GetComponent<SpokyVision>();
         spokyMovement = GetComponent<SpokyMovement>();
         spokyCombat = GetComponent<SpokyCombat>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public int GetDamage() {

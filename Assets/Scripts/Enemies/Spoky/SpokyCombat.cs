@@ -107,6 +107,17 @@ public class SpokyCombat : MonoBehaviour, IDamageable
             damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
 
             _spokyAnim.SetHit(true, _spoky.health);
+
+            if (_spoky.health > 0) {
+                if (_spoky.affectedTime) {
+                    _spoky.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.EnemyHurt));
+                }
+            }
+            else { //equal to other condition but I may change it later
+                if(_spoky.affectedTime) {
+                    _spoky.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.EnemyHurt));
+                }
+            }
         }
     }
 
@@ -126,6 +137,11 @@ public class SpokyCombat : MonoBehaviour, IDamageable
         _spokyAnim.SetHit(false);
         isSpoked = false;
     }
+
+    public void PlayAttackSound() {
+        _spoky.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.EnemyAttack));
+    }
+
 
     public IEnumerator ChangeColor() {
 

@@ -8,8 +8,8 @@ public class Boss : MonoBehaviour
 
     public Transform core;
 
-    public BossCombat bossCombat;
-    public BossMovement bossMovement;
+    [HideInInspector] public BossCombat bossCombat;
+    [HideInInspector] public BossMovement bossMovement;
 
     public SpriteRenderer _renderer;
 
@@ -17,7 +17,7 @@ public class Boss : MonoBehaviour
     public int health = 500;
     public bool figthStarted = false;
 
-    public AudioSource audioSource;
+    [HideInInspector] public AudioSource audioSource;
     private Animator _anim;
 
     public delegate void AttUI(int damage);

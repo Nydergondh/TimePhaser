@@ -87,13 +87,26 @@ public class SpokeyShooterCombat : MonoBehaviour, IDamageable
             _spokyAnim.SetHit(true, _spokey.health);
 
             damagePopUp = Instantiate(textDamage, _spokey.spookyEyes.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
-
-    
-            rand = Random.Range(0.8f, 1.2f);
-            damage = (int)(rand * damage);
-
             damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
+
+            if (_spokey.health > 0) {
+                _spokey.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.EnemyHurt));
+            }
+            else {
+                StopAttackSound();
+                _spokey.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.EnemyHurt));
+            }
         }
+    }
+
+
+    public void PlayAttackSound() {
+        //if (!_spokey.audioSource.isPlaying) {
+            _spokey.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.EnemyFire));
+        //}
+    }
+    public void StopAttackSound() {
+        _spokey.audioSource.Stop();
     }
 
 

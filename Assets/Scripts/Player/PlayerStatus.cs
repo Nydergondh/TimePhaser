@@ -6,10 +6,10 @@ public class PlayerStatus : MonoBehaviour
 {
     public static PlayerStatus player;
 
-    public PlayerMovement playerMovement;
-    public PlayerCombat playerCombat;
-    public PlayerGroundCollision playerGround;
-    public AudioSource audioSource;
+    [HideInInspector] public PlayerMovement playerMovement;
+    [HideInInspector] public PlayerCombat playerCombat;
+    [HideInInspector] public PlayerGroundCollision playerGround;
+    [HideInInspector] public AudioSource audioSource;
 
     public Transform damageUISpawnPoint;
     public Transform followTransform;
