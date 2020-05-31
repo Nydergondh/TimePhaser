@@ -122,13 +122,11 @@ public class PlayerMovement : MonoBehaviour
                     //Is falling and DID came from a jump state
                     if (rigidbody.velocity.y < minimumDeltaY && !isTouchingGround) {
                         _jumping = false;
-                        playerAnim.SetJump(_jumping);
                         deltaY = rigidbody.velocity.y;
                     }
                     //if is falling and hitted the ground
                     else if (rigidbody.velocity.y < minimumDeltaY && isTouchingGround) {
                         _jumping = false;
-                        playerAnim.SetJump(_jumping);
                         deltaY = 0;
                     }
                     else {
@@ -150,9 +148,10 @@ public class PlayerMovement : MonoBehaviour
 
             vel = new Vector2(deltaX, deltaY);
             rigidbody.velocity = vel;
-
+            //update animator
             playerAnim.SetVelocity(vel);
             playerAnim.SetPlayerDash(_dashing);
+            playerAnim.SetJump(_jumping);
 
         }
 
@@ -190,7 +189,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump() {
         _jumping = true;
-        playerAnim.SetJump(_jumping);
         isTouchingGround = false;
     }
 

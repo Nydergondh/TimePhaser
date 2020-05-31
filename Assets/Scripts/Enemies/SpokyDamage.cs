@@ -11,9 +11,8 @@ public class SpokyDamage : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (playerLayer == (playerLayer | 1 << collision.gameObject.layer)) {
             if (collision.GetComponent<IDamageable>() != null) {
-                collision.GetComponent<IDamageable>().OnDamage(GetComponentInParent<SpokyEnemy>().damage);
+                collision.GetComponent<IDamageable>().OnDamage(GetComponentInParent<IDamage>().GetDamage());
             }
-
             SpawnParticles(collision);
         }
     }

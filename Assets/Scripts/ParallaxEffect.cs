@@ -13,6 +13,9 @@ public class ParallaxEffect : MonoBehaviour
     private float _textureUnitSizeX;
     private float _textureUnitSizeY;
 
+    public bool affectY = false;
+    public bool affectX = true;
+
     private SpriteRenderer _spriteRenderer;
     // Start is called before the first frame update
     void Start()
@@ -28,19 +31,19 @@ public class ParallaxEffect : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         Vector3 deltaMovement = Camera.main.transform.position - _lastCameraPosition;
         transform.position += new Vector3(deltaMovement.x * _paralaxEffect.x, deltaMovement.y * _paralaxEffect.y);
         _lastCameraPosition = _cameraTransform.position;
 
-        if (Mathf.Abs(_cameraTransform.position.x - transform.position.x) >= _textureUnitSizeX) {
+        if (Mathf.Abs(_cameraTransform.position.x - transform.position.x) >= _textureUnitSizeX && affectX) {
             float offsetPositionX = (_cameraTransform.position.x - transform.position.x) % _textureUnitSizeX;
             transform.position = new Vector3(_cameraTransform.position.x + offsetPositionX, transform.position.y);
         }
-        //if (Mathf.Abs(_cameraTransform.position.x - transform.position.x) >= _textureUnitSizeX) {
-        //    float offsetPositionY = (_cameraTransform.position.y - transform.position.y) % _textureUnitSizeY;
-        //    transform.position = new Vector3(transform.position.x, transform.position.y, _cameraTransform.position.y + offsetPositionY);
-        //}
+        if (Mathf.Abs(_cameraTransform.position.y - transform.position.y) >= _textureUnitSizeY && affectY) {
+            float offsetPositionY = (_cameraTransform.position.y - transform.position.y) % _textureUnitSizeY;
+            transform.position = new Vector3(transform.position.x, _cameraTransform.position.y + offsetPositionY);
+        }
     }
 }

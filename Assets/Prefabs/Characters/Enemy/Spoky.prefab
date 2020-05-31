@@ -271,7 +271,7 @@ MonoBehaviour:
   spokyCombat: {fileID: 0}
   spookyEyes: {fileID: 1224628908989088993}
   raycastDetect: {fileID: 7783957709401069925}
-  abbys: {fileID: 0}
+  abbys: {fileID: 221557325}
   _renderer: {fileID: 1224628908722013144}
 --- !u!114 &1224628909001756540
 MonoBehaviour:
@@ -293,7 +293,7 @@ MonoBehaviour:
     m_Bits: 2048
   groundLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
 --- !u!114 &1224628909001756541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
   wanderRange: 2.5
 --- !u!114 &1224628909001756538
 MonoBehaviour:

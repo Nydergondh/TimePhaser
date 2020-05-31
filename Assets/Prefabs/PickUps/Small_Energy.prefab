@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3904306570066713391}
   - component: {fileID: 8455969829926406034}
   - component: {fileID: 5809892228449441552}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Small_Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,6 +84,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
+  respawnable: 0
+  respawnTime: 10
   pickUpValue: 25
   pickUp: 0
 --- !u!1 &3904306570716967020
@@ -96,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3904306570716967022}
   - component: {fileID: 3904306570716967021}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Small_Energy_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,8 +155,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -206036327
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2040057753640575754, guid: e721b6fe68285ce47b0f3586167d9fd4,
     type: 3}

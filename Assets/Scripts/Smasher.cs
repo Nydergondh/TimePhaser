@@ -48,12 +48,16 @@ public class Smasher : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        IDamageable damageableComponent;
+
         if (groundLayer.value == (groundLayer | (1 << collision.gameObject.layer))) {
             _retractingSmash = true;
         }
         else if (playerLayer.value == (playerLayer | (1 << collision.gameObject.layer))) {
             _retractingSmash = true;
-            collision.GetComponent<PlayerCombat>().OnDamage(smashDamage);
+            if (collision.gameObject.TryGetComponent<IDamageable>(out damageableComponent)) {
+                damageableComponent.OnDamage(smashDamage);
+            }
         }
     }
 }

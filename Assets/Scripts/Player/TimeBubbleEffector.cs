@@ -24,9 +24,6 @@ public class TimeBubbleEffector : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
 
         if (bubbleCollider.IsTouchingLayers(effectedLayers)) {
-
-            //effectdColliders.Add(collision);
-            print("GotHere");
             //slow down animator
             if (collision.GetComponent<SpokyEnemy>()) {
                 if (collision.GetComponent<Animator>() != null) {

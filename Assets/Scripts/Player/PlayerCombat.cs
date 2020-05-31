@@ -92,8 +92,16 @@ public class PlayerCombat : MonoBehaviour, IDamageable
                     damagePopUp = Instantiate(textDamage, PlayerStatus.player.damageUISpawnPoint.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
                     damagePopUp.GetComponent<TextMeshPro>().text = damage.ToString();
 
-                    StartCoroutine(InivisibilityFrames());
+                    StartCoroutine(InivisibilityFrames());//add invicibility frames
+                    //update UI
                     PlayerStatus.player.attUI?.Invoke(PlayerStatus.player.health, UISliderController.SliderType.Health);
+                    //play sound
+                    if (PlayerStatus.player.health > 0) {
+                        PlayerStatus.player.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Hurt));
+                    }
+                    else {
+                        PlayerStatus.player.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Death));
+                    }
                 }
                 else {
                     damagePopUp = Instantiate(textDamage, PlayerStatus.player.damageUISpawnPoint.position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
@@ -104,6 +112,10 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
             }
         }
+    }
+
+    public void PlayPunchSound() {
+        PlayerStatus.player.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Punch));
     }
 
     private void SetPlayerAttack() {
@@ -146,6 +158,10 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     public void SetHurtAnim() {
         _playerAnim.SetHit(true);
         _isHurt = true;
+    }
+
+    public bool GetInvicibility() {
+        return _isInvincible;
     }
 
     public IEnumerator InivisibilityFrames() {
