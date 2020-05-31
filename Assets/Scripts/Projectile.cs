@@ -41,11 +41,11 @@ public class Projectile : MonoBehaviour {
         if (playerLayer == (playerLayer | 1 << collision.gameObject.layer)) {
             if (collision.GetComponent<IDamageable>() != null) {
                 collision.GetComponent<IDamageable>().OnDamage(damage);
+                SpawnParticles(collision);
+                //UnsetBulletParameters();
+                Destroy(gameObject);
             }
 
-            SpawnParticles(collision);
-            //UnsetBulletParameters();
-            Destroy(gameObject);
         }
         else if (groundLayer == (groundLayer | 1 << collision.gameObject.layer) && !penetrateWall) {
             SpawnParticles(collision);

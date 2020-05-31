@@ -56,7 +56,7 @@ public class SpokyVision : MonoBehaviour
     private bool RayTest(float distance) {
 
         RaycastHit2D rayCastHit;
-
+        //checking if going straigth to a wall or falling befolre reach target
         if (distance < 0) {
             print("Going Rigth");
             if ((rayCastHit = Physics2D.Raycast(_spoky.raycastDetect.position, Vector2.right, Mathf.Abs(distance), groundLayer)) || GoingToTheAbyss()) {

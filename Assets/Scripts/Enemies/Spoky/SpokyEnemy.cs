@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpokyEnemy : MonoBehaviour
+public class SpokyEnemy : MonoBehaviour, IDamage
 {
     public float movementSpeed = 1f; // Maximum Horizontal Speed
     public float movementjump = 3f; // Jump Speed (once pressed (afterwards affected by gravity))
@@ -26,4 +26,7 @@ public class SpokyEnemy : MonoBehaviour
         spokyCombat = GetComponent<SpokyCombat>();
     }
 
+    public int GetDamage() {
+        return damage;
+    }
 }

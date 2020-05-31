@@ -68,6 +68,10 @@ public class BossCombat : MonoBehaviour, IDamageable
         GameObject projectile;
         int spawn;
 
+        if (GetBossHealthPer() <= 0.25f) {
+            attackType = AttackType.All;
+        }
+
         if (attackType == AttackType.Rigth) {
             spawnPoints = Boss.boss.bossMovement.rigthTransform.GetComponentsInChildren<Transform>();
             spawn = Random.Range(0, spawnPoints.Length);
@@ -91,6 +95,39 @@ public class BossCombat : MonoBehaviour, IDamageable
 
             projectile = Instantiate(bossProjectile, spawnPoints[spawn].position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
         }
+        else if(attackType == AttackType.All) {
+            int rand = 3;
+            int result;
+
+            result =Random.Range(0,rand);
+            
+            switch (result) {
+                case 0:
+                    spawnPoints = Boss.boss.bossMovement.leftTransform.GetComponentsInChildren<Transform>();
+                    spawn = Random.Range(0, spawnPoints.Length);
+
+                    projectile = Instantiate(bossProjectile, spawnPoints[spawn].position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
+                    break;
+
+                case 1:
+                    spawnPoints = Boss.boss.bossMovement.upTransform.GetComponentsInChildren<Transform>();
+                    spawn = Random.Range(0, spawnPoints.Length);
+
+                    projectile = Instantiate(bossProjectile, spawnPoints[spawn].position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
+                    projectile.GetComponent<Projectile>().goingHorizontal = false;
+                    break;
+
+                case 2:
+                    spawnPoints = Boss.boss.bossMovement.rigthTransform.GetComponentsInChildren<Transform>();
+                    spawn = Random.Range(0, spawnPoints.Length);
+
+                    projectile = Instantiate(bossProjectile, spawnPoints[spawn].position, Quaternion.identity, InstaciatedObjects.fatherReference.transform);
+                    projectile.GetComponent<Projectile>().movementSpeed *= -1;
+                    projectile.transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+                    break;
+            }
+            
+        }
 
     }
 
@@ -104,6 +141,8 @@ public class BossCombat : MonoBehaviour, IDamageable
 
             if (Boss.boss.health > 0) {
                 Boss.boss.health -= damage;
+                AttBossPatern();
+
                 if (Boss.boss.health > 0) {
                     if (colorChangeTimer <= 0) {
                         StartCoroutine(ChangeColor());
@@ -118,6 +157,33 @@ public class BossCombat : MonoBehaviour, IDamageable
 
             Boss.boss.attUI?.Invoke(Boss.boss.health);
         }
+    }
+
+    private void AttBossPatern() {
+        float aux, max, current;
+        max = (float)Boss.boss.maxHealth;
+        current = (float)Boss.boss.health;
+
+        aux = (current / max);
+        if (aux <= 0.75 && aux > 0.50) {
+            _attackCd = 0.2f;
+        }
+        else if (aux <= 0.50 && aux > 0.25) {
+            _attackCd = 0.1f;
+        }
+        else if (aux <= 0.25 && aux > 0f) {
+            _attackCd = 0.1f;
+        }
+    }
+
+    private float GetBossHealthPer() {
+        float aux, max, current;
+
+        max = (float)Boss.boss.maxHealth;
+        current = (float)Boss.boss.health;
+        aux = (current / max);
+
+        return aux;
     }
 
     public IEnumerator ChangeColor() {
@@ -157,6 +223,7 @@ public class BossCombat : MonoBehaviour, IDamageable
     public enum AttackType {
         Rigth,
         Left,
-        Up
+        Up,
+        All
     }
 }

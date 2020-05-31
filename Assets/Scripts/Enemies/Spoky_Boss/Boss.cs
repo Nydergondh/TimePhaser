@@ -13,9 +13,11 @@ public class Boss : MonoBehaviour
 
     public SpriteRenderer _renderer;
 
+    public int maxHealth = 500;
     public int health = 500;
     public bool figthStarted = false;
 
+    public AudioSource audioSource;
     private Animator _anim;
 
     public delegate void AttUI(int damage);
@@ -35,6 +37,9 @@ public class Boss : MonoBehaviour
         _anim = GetComponent<Animator>();
         bossCombat = GetComponent<BossCombat>();
         bossMovement = GetComponent<BossMovement>();
+        audioSource = GetComponent<AudioSource>();
+
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -77,6 +82,7 @@ public class Boss : MonoBehaviour
 
         transform.DetachChildren();
         Destroy(GetComponent<Collider2D>());
+        PlayExplosionSound();
         Destroy(_anim);
     }
 
@@ -84,4 +90,11 @@ public class Boss : MonoBehaviour
         figthStarted = true;
     }
 
+    public void PlayScreamSound() {
+        audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.BossScream));
+    }
+
+    public void PlayExplosionSound() {
+        audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.BossExplode));
+    }
 }

@@ -9,6 +9,7 @@ public class PlayerStatus : MonoBehaviour
     public PlayerMovement playerMovement;
     public PlayerCombat playerCombat;
     public PlayerGroundCollision playerGround;
+    public AudioSource audioSource;
 
     public Transform damageUISpawnPoint;
     public Transform followTransform;
@@ -34,6 +35,7 @@ public class PlayerStatus : MonoBehaviour
         playerCombat = GetComponent<PlayerCombat>();
         playerMovement = GetComponent<PlayerMovement>();
         playerGround = GetComponent<PlayerGroundCollision>();
+        audioSource = GetComponent<AudioSource>();
 
         damage = maxDamage;
         energy = maxEnergy;
@@ -58,7 +60,7 @@ public class PlayerStatus : MonoBehaviour
         else {
             health = maxHealth;
         }
-        attUI?.Invoke(heal, sliderType);
+        attUI?.Invoke(health, sliderType);
 
     }
 
@@ -70,7 +72,7 @@ public class PlayerStatus : MonoBehaviour
             energy += ener;
         }
         else {
-            energy = maxHealth;
+            energy = maxEnergy;
         }
         attUI?.Invoke(energy, sliderType);
 
