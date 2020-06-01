@@ -58,6 +58,7 @@ public class Boss : MonoBehaviour
 
     public IEnumerator BossDeath() {
         _anim.SetBool("Alive", false);
+        PlayerStatus.player.playerCombat.SetInvincible(true);
         yield return new WaitForSeconds(2.5f);
         DestroyBoss();
         yield return new WaitForSeconds(10f);
