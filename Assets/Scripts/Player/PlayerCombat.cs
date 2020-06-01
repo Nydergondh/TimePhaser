@@ -32,7 +32,6 @@ public class PlayerCombat : MonoBehaviour, IDamageable
             if (Input.GetKeyDown(KeyCode.Q) && _bubbleTimer <= 0 && PlayerStatus.player.energy > 0) {
 
                 SetPlayerBubble();
-                _bubbleTimer = timeBubbleCD;
 
                 PlayerStatus.player.playerMovement.FreezeMovement();
             }
@@ -58,6 +57,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     public void InstaciateTimeBubble() {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 desiredPos = new Vector3(mousePos.x, mousePos.y, 0);
+        _bubbleTimer = timeBubbleCD;
 
         Instantiate(bubblePrefab, desiredPos, Quaternion.identity, bubbleParent);
     }
@@ -102,6 +102,11 @@ public class PlayerCombat : MonoBehaviour, IDamageable
                     else {
                         PlayerStatus.player.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Death));
                         PlayerStatus.player.attUI?.Invoke(0, UISliderController.SliderType.Health);
+
+                        GameManager.gameManager.endGame = true;
+
+                        StartCoroutine(GameManager.MuteAudioOnDeath());
+                        GameManager.gameManager.UI.GetComponent<Animator>().SetBool("PlayerDead", true);
                     }
                 }
                 else {

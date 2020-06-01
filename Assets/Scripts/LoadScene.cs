@@ -17,6 +17,9 @@ public class LoadScene : MonoBehaviour
             LoadLevel();
         }
         else if (Input.GetKeyDown(KeyCode.Return) && currentLevel == 1 && GameManager.gameManager.endGame) {
+            if (AudioListener.volume <= 0) {
+                GameManager.UnMuteAudio();
+            }
             LoadLevel();
         }
         else if (Input.GetKeyDown(KeyCode.Escape)) {

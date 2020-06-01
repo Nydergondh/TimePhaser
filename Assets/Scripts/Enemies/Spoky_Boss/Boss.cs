@@ -13,7 +13,6 @@ public class Boss : MonoBehaviour
 
     public SpriteRenderer _renderer;
     public GameObject bossUI;
-    public Canvas UI;
 
     public int maxHealth = 500;
     public int health = 500;
@@ -62,7 +61,7 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         DestroyBoss();
         yield return new WaitForSeconds(10f);
-        UI.GetComponent<Animator>().SetBool("EndGame", true);
+        GameManager.gameManager.UI.GetComponent<Animator>().SetBool("EndGame", true);
     }
 
     public void DestroyBoss() {
