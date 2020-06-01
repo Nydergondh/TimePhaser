@@ -8,25 +8,31 @@ using UnityEngine.UI;
 public class LoadScene : MonoBehaviour
 {
 
-    public GameObject loadingScreen;
-    public Slider slider;
+    public int sceneIndex;
+    //public GameObject loadingScreen;
+    //public Slider slider;
 
-    public void LoadLevel(int sceneIndex) {
-        StartCoroutine(LoadAsynchorously(sceneIndex));
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            LoadLevel();
+        }
     }
 
-    IEnumerator LoadAsynchorously(int sceneIndex) {
+    public void LoadLevel() {
+        StartCoroutine(LoadAsynchorously());
+    }
+
+    IEnumerator LoadAsynchorously() {
         float progress;
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-
-        loadingScreen.SetActive(true);
+        //loadingScreen.SetActive(true);
 
         while (!operation.isDone) {
             progress = Mathf.Clamp01(operation.progress / 0.9f);
-
-            slider.value = progress;
-
+            print(progress);
+            //slider.value = progress;
             yield return null;
         }
     }
+
 }
