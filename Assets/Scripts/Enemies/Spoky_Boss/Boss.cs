@@ -12,6 +12,8 @@ public class Boss : MonoBehaviour
     [HideInInspector] public BossMovement bossMovement;
 
     public SpriteRenderer _renderer;
+    public GameObject bossUI;
+    public Canvas UI;
 
     public int maxHealth = 500;
     public int health = 500;
@@ -45,7 +47,7 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (figthStarted) {
+        if (figthStarted && health > 0) {
             bossCombat.Combat();
             bossMovement.Movement();
         }
@@ -59,6 +61,8 @@ public class Boss : MonoBehaviour
         _anim.SetBool("Alive", false);
         yield return new WaitForSeconds(2.5f);
         DestroyBoss();
+        yield return new WaitForSeconds(10f);
+        UI.GetComponent<Animator>().SetBool("EndGame", true);
     }
 
     public void DestroyBoss() {
@@ -81,9 +85,13 @@ public class Boss : MonoBehaviour
         }
 
         transform.DetachChildren();
+
         Destroy(GetComponent<Collider2D>());
         PlayExplosionSound();
+        bossUI.SetActive(false);
         Destroy(_anim);
+
+        GameManager.gameManager.endGame = true;
     }
 
     public void StartBossFigth() {

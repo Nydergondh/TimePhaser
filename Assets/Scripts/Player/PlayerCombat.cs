@@ -94,13 +94,14 @@ public class PlayerCombat : MonoBehaviour, IDamageable
                     //add invicibility frames
                     StartCoroutine(InivisibilityFrames());
                     //update UI
-                    PlayerStatus.player.attUI?.Invoke(PlayerStatus.player.health, UISliderController.SliderType.Health);
                     //play sound
                     if (PlayerStatus.player.health > 0) {
                         PlayerStatus.player.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Hurt));
+                        PlayerStatus.player.attUI?.Invoke(PlayerStatus.player.health, UISliderController.SliderType.Health);
                     }
                     else {
                         PlayerStatus.player.audioSource.PlayOneShot(SoundManager.GetSound(SoundAudios.Sound.Death));
+                        PlayerStatus.player.attUI?.Invoke(0, UISliderController.SliderType.Health);
                     }
                 }
                 else {

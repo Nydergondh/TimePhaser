@@ -175,7 +175,6 @@ public class SpokyCombat : MonoBehaviour, IDamageable
 
             yield return null;
         }
-        print(i + " " +aux);
     }
     
     private void OnDrawGizmosSelected() {

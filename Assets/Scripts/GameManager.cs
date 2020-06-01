@@ -7,9 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
 
-    public bool startGame = false;
     public bool endGame = false;
-
 
     void Awake() {
         if (gameManager != null) {
@@ -19,9 +17,4 @@ public class GameManager : MonoBehaviour
         gameManager = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 }

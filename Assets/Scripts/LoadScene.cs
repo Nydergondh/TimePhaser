@@ -7,14 +7,20 @@ using UnityEngine.UI;
 //Use This In conjunt with a UI to load new scene 
 public class LoadScene : MonoBehaviour
 {
-
+    public int currentLevel;
     public int sceneIndex;
     //public GameObject loadingScreen;
     //public Slider slider;
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Return)) {
+        if (Input.GetKeyDown(KeyCode.Return) && currentLevel == 0) {
             LoadLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.Return) && currentLevel == 1 && GameManager.gameManager.endGame) {
+            LoadLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
         }
     }
 

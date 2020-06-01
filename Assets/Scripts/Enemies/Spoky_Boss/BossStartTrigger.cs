@@ -11,8 +11,6 @@ public class BossStartTrigger : MonoBehaviour
     public CinemachineVirtualCamera cinemachineVirtual;
     public OpenBossDoor bossCloseDoor;
 
-    public GameObject bossUI;
-
     public AudioClip mainMusic;
     public AudioClip bossMusic;
 
@@ -26,7 +24,7 @@ public class BossStartTrigger : MonoBehaviour
 
             cinemachineVirtual.Follow = PlayerStatus.player.followTransform;
             cinemachineVirtual.Priority = 20;
-            bossUI.SetActive(true);
+            Boss.boss.bossUI.SetActive(true);
 
             Camera.main.GetComponentInChildren<AudioSource>().clip = bossMusic;
             Camera.main.GetComponentInChildren<AudioSource>().Play();
